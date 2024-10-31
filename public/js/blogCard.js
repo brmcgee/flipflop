@@ -57,7 +57,7 @@ function getId(t) {
 async function getCommentById(id) {
     let cont = document.querySelector(`.commentPanel`);
     cont.innerHTML = '';
-    let data = await fetch(`http://mysite.boxcar.site/comments/${id}`);
+    let data = await fetch(`https://mysite.boxcar.site/comments/${id}`);
     let result = await data.json();
     result.forEach(r => {
         // cont.innerHTML += `<li>` + r.comment + `${r.author}</li><br>`
