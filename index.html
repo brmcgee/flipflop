@@ -16,7 +16,7 @@
 <body>
 
       <div class="d-flex justify-content-between bg-333 shadow text-light p-3 rounded">
-        <h3 class="">BLOGSBY</h3>
+        <h3 class=""><span class="text-warning">@</span>BLOGSBY</h3>
         <div class=""><a href="http://mysite.boxcar.site/create" class="text-warning bg-dark rounded p-1 ms-1">Create Post</a></div>
       </div>
 
@@ -28,15 +28,15 @@
 
 
 
-    <div class="d-flex align-items-baseline border p-2 border-secondary shadow m-2">
-    <div class="col-sm-12 col-md-3">
+    <div class="d-flex align-items-baseline  justify-content-around border p-2 border-secondary shadow m-2">
+    <div class="">
 
-      <p class="m-2"><input id="getId" type="number" value="144" onchange="getId(this.value)"> Post Id</p>
+      <p class="m-2"><input id="getId" type="number" value="145" onchange="getId(this.value)"> Post Id</p>
       <p class="m-2"><input id="userId" type="text" value="" onchange="getUser(this.value)"> User Name</p>
        
 
         <form  action="https://mysite.boxcar.site/post-comment" method="post"  
-                class="d-flex flex-column m-1 mt-3 p-3 border border-dark rounded " style="max-width: 300px;">
+                class="d-flex flex-column m-1 mt-3 p-3 border border-secondary rounded " style="max-width: 300px;">
 
         <!-- <form  action="http://127.0.0.1:5000/post-comment" method="post"  
                 class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;"> -->
@@ -49,7 +49,7 @@
           <input type="text" name="user" id="user">
           
           <label for="display" >display</label>
-          <input type="text" name="display" id="display" value="brian">
+          <input type="text" name="display" id="display">
           
           <label for="password">password</label>
           <input type="text" name="password" id="password">
@@ -64,15 +64,17 @@
           <input type="text" name="comment" id="comment">
 
           <br> 
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-secondary">Submit</button>
         </form>
 
     </div>
 
-    <div class="col-sm-12 col-md-6">
+    <div class="">
         <div id="blogPanel"></div>
         <div id="user"></div>
     </div>
+
+ 
 
 </div>
 
