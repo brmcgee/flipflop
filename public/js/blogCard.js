@@ -23,10 +23,19 @@ async function getPostById(file, destination, id) {
     let container = document.getElementById(destination);
     let data = await fetch(`${file}/${id}`);
     let result = await data.json();
+
     let html = blogCard(result);
-    container.innerHTML = html;
+
+    
+    
     loading = false;
+
+    container.innerHTML = html;
+   
     panel.classList.remove('loader');
+
+   
+
     var i;
 
     for (i = 0; i < acc.length; i++) {
