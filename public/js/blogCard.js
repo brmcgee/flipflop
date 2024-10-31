@@ -111,7 +111,11 @@ async function getUser(i) {
     document.getElementById('post').value = document.getElementById('getId').value;
     let comment = document.getElementById('addComment').value;
     document.getElementById('comment').value = comment;
+    let userImg = r.avatar;
+    (document.getElementById('userAvatarImg').src) = userImg;
+    
 
+    
 }
 
 function handleAddComment() {
@@ -119,7 +123,7 @@ function handleAddComment() {
     let user = document.getElementById('user').value;
     let display = document.getElementById('display').value;
     let avatar = document.getElementById('avatar').value;
-    let comment = document.getElementById('comment').value;
+    let comment = document.getElementById('addComment').value;
     let post = document.getElementById('getId').value;
     
 
@@ -139,14 +143,15 @@ function handleAddComment() {
             let html = makeCommentComponent(com);
             document.querySelector('.commentPanel').innerHTML += html;
 
-            document.getElementById('user').value = '';
-            document.getElementById('display').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('avatar').value = '';
-            document.getElementById('post').value = '';
+            // document.getElementById('user').value = '';
+            // document.getElementById('display').value = '';
+            // document.getElementById('password').value = '';
+            // document.getElementById('email').value = '';
+            // document.getElementById('avatar').value = '';
+            // document.getElementById('post').value = '';
             document.getElementById('comment').value = '';
-            document.getElementById('userId').value = '';
+            // document.getElementById('userId').value = '';
+            document.getElementById('addComment').value = '';
 
 
         }

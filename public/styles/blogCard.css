@@ -31,7 +31,7 @@
     padding: 0 18px;
     background-color: rgb(250, 248, 248);
     max-height: 0;
-    overflow: hidden;
+    overflow-y: scroll;
     transition: max-height 0.2s ease-out;
 
   }
@@ -68,3 +68,7 @@
     margin-right: 0px;
     font-size: 14px;
   }
+
+  .bg-gray {
+    background-color: rgb(192, 192, 192);
+   }

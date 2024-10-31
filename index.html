@@ -34,28 +34,41 @@
         <div class="col-sm-12 col-md-3 col-6-lg">
 
             <div class="mx-auto">
-                <label class="m-2"><input id="getId" type="number" value="142" onchange="getId(this.value)"> Post Id</label>
-                <label class="m-2"><input id="userId" type="text" value="" onchange="getUser(this.value)"> User Name</label>
-                <select name="userList" id="userList" onchange="populateUserIdInput(this.value)">
-                    <option value="Brian M">Brian M</option>
-                    <option value="Guest">Guest</option>
-                    <option value="Cricket">Cricket</option>
-                    <option value="Brian M">Brian M</option>
-                    <option value="Lady G">Lady G</option>
-                    <option value="Snoop D">Snoop D</option>
-                    <option value="Hootie">Hootie</option>
-                    <option value="Trump">Trump</option>
-                    <option value="Zeva">Zeva</option>
-                    <option value="Mr. Froggy">Mr. Froggy</option>
-                    <option value="Pete">Pete</option>
-                    <option value="Hester">Hester</option>
-                    <option value="Donald Ducky">Donald Ducky</option>
-                    <option value="News">News</option>
-                    <option value="Jinko">Jinko</option>
-                    <option value="Casper">Casper</option>
-                    <option value="Bonita Wilson">Bonita Wilson</option>
+                <div class="form-group">
+                  <label class="form-control bg-gray border-0"><input id="getId" type="number" value="142" onchange="getId(this.value)" class="form-control"> Post Id</label>
+                </div>
+                <div class="form-group">
+                  <label class="form-control bg-gray border-0" hidden>
+                    <input id="userId" type="text" value="" onchange="getUser(this.value)" class="form-control"> User Name
+                  </label>
+                </div>
+                <div class="form-control bg-gray border-0 text-primary d-flex flex-column ">
+                    <label for="userList" class="h3">
+                      <img src='https://showmelyrics.com/images/nophoto.jpg' width="70" height="70" alt="" id="userAvatarImg" class="rounded-circle">
+                        User Info 
+                    </label>
+                    <select name="userList" id="userList" class="form-control mt-2" onchange="populateUserIdInput(this.value)">
+                        <option value="Brian M">Brian M</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Cricket">Cricket</option>
+                        <option value="Brian M">Brian M</option>
+                        <option value="Lady G">Lady G</option>
+                        <option value="Snoop D">Snoop D</option>
+                        <option value="Hootie">Hootie</option>
+                        <option value="Trump">Trump</option>
+                        <option value="Zeva">Zeva</option>
+                        <option value="Mr. Froggy">Mr. Froggy</option>
+                        <option value="Pete">Pete</option>
+                        <option value="Hester">Hester</option>
+                        <option value="Donald Ducky">Donald Ducky</option>
+                        <option value="News">News</option>
+                        <option value="Jinko">Jinko</option>
+                        <option value="Casper">Casper</option>
+                        <option value="Bonita Wilson">Bonita Wilson</option>
+    
+                    </select>
+                </div>
 
-                </select>
             </div>
 
 
@@ -63,30 +76,30 @@
                     class="d-flex flex-column mx-auto mt-3 p-2 border border-secondary rounded " style="max-width: 300px;"> -->
 
             <form   
-                    class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;">
-                <label for="post">post</label>
-                <input type="text" name="post" id="post">
+                    class="d-none d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;">
+                <label for="post" hidden>post</label>
+                <input type="text" name="post" id="post" hidden>
 
-                <label for="user">user</label>
-                <input type="text" name="user" id="user">
+                <label for="user" hidden>user</label>
+                <input type="text" name="user" id="user" hidden>
                 
-                <label for="display" >display</label>
-                <input type="text" name="display" id="display">
+                <label for="display" hidden>display</label>
+                <input type="text" name="display" id="display" hidden>
                 
-                <label for="password">password</label>
-                <input type="text" name="password" id="password">
+                <label for="password" hidden>password</label>
+                <input type="text" name="password" id="password" hidden>
                 
-                <label for="email">email</label>
-                <input type="text" name="email" id="email"> 
+                <label for="email" hidden>email</label>
+                <input type="text" name="email" id="email" hidden> 
                 
-                <label for="avatar">avatar</label>
-                <input type="text" name="avatar" id="avatar">
+                <label for="avatar" hidden>avatar</label>
+                <input type="text" name="avatar" id="avatar" hidden>
                 
-                <label for="comment">comment</label>
-                <input type="text" name="comment" id="comment">
+                <label for="comment" hidden>comment</label>
+                <input type="text" name="comment" id="comment" hidden>
 
                 <br> 
-                <button onclick="handleAddComment()" type="button" class="btn btn-secondary">Submit</button>
+                <button onclick="handleAddComment()" hidden type="button" class="btn btn-secondary">Submit</button>
             </form>
 
         </div>
