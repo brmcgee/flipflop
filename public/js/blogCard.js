@@ -4,7 +4,7 @@ var acc = document.getElementsByClassName("commentBtn");
 let fetchHTML = '';
 let postIdURL = 'https://mysite.boxcar.site/posts';
 let divId = 'blogPanel'
-let postId = 163;
+let postId = document.getElementById('getId').value;
 let panel = document.getElementById(divId);
 
 let loading = true;
@@ -98,7 +98,10 @@ async function getUser(i) {
     document.getElementById('password').value = r.user_password;
     document.getElementById('email').value = r.email;
     document.getElementById('avatar').value = r.avatar;
-    document.getElementById('post').value = postId;
+    document.getElementById('post').value = document.getElementById('getId').value;
+    let comment = document.getElementById('addComment').value;
+    document.getElementById('comment').value = comment;
+
   
 }
 
