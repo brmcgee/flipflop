@@ -16,8 +16,9 @@
 <body>
 
       <div class="d-flex justify-content-between bg-333 shadow text-light p-3 rounded">
-        <h3 class="container-lg"><span class="text-warning">@</span>BLOGSBY</h3>
-        <div class=""><a href="http://mysite.boxcar.site/create" class="text-warning bg-dark rounded p-1 ms-1">Create Post</a></div>
+        <div class="col-1"></div>
+        <div class="col-7"><h3><span class="text-warning">@</span>BLOGSBY</h3></div>
+        <div class="col-2"><a href="http://mysite.boxcar.site/create" class="text-light bg-dark rounded p-1">Create Post</a></div>
       </div>
 
 
@@ -28,51 +29,52 @@
 
 
 
-    <div class="container-lg mx-auto d-flex align-items-baseline justify-content-around border p-2 border-secondary shadow m-2">
-    <div class="">
+    <div class="container-lg mx-auto d-flex align-items-baseline justify-content-around flex-wrap border p-2 border-secondary shadow m-2">
+    
+        <div class="col-sm-12 col-md-3 col-6-lg">
 
-      <p class="m-2"><input id="getId" type="number" value="145" onchange="getId(this.value)"> Post Id</p>
-      <p class="m-2"><input id="userId" type="text" value="" onchange="getUser(this.value)"> User Name</p>
-       
+            <div class="mx-auto">
+                <label class="m-2"><input id="getId" type="number" value="142" onchange="getId(this.value)"> Post Id</label>
+                <label class="m-2"><input id="userId" type="text" value="" onchange="getUser(this.value)"> User Name</label>
+            </div>
 
-        <form  action="https://mysite.boxcar.site/post-comment" method="post"  
-                class="d-flex flex-column m-1 mt-3 p-3 border border-secondary rounded " style="max-width: 300px;">
 
-        <!-- <form  action="http://127.0.0.1:5000/post-comment" method="post"  
-                class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;"> -->
-          
-          
-          <label for="post">post</label>
-          <input type="text" name="post" id="post">
+            <form  action="https://mysite.boxcar.site/post-comment" method="post"  
+                    class="d-flex flex-column mx-auto mt-3 p-2 border border-secondary rounded " style="max-width: 300px;">
 
-          <label for="user">user</label>
-          <input type="text" name="user" id="user">
-          
-          <label for="display" >display</label>
-          <input type="text" name="display" id="display">
-          
-          <label for="password">password</label>
-          <input type="text" name="password" id="password">
-          
-          <label for="email">email</label>
-          <input type="text" name="email" id="email"> 
-          
-          <label for="avatar">avatar</label>
-          <input type="text" name="avatar" id="avatar">
-          
-          <label for="comment">comment</label>
-          <input type="text" name="comment" id="comment">
+            <!-- <form  action="http://127.0.0.1:5000/post-comment" method="post"  
+                    class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;"> -->
+                <label for="post">post</label>
+                <input type="text" name="post" id="post">
 
-          <br> 
-        <button type="submit" class="btn btn-secondary">Submit</button>
-        </form>
+                <label for="user">user</label>
+                <input type="text" name="user" id="user">
+                
+                <label for="display" >display</label>
+                <input type="text" name="display" id="display">
+                
+                <label for="password">password</label>
+                <input type="text" name="password" id="password">
+                
+                <label for="email">email</label>
+                <input type="text" name="email" id="email"> 
+                
+                <label for="avatar">avatar</label>
+                <input type="text" name="avatar" id="avatar">
+                
+                <label for="comment">comment</label>
+                <input type="text" name="comment" id="comment">
 
-    </div>
+                <br> 
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
 
-    <div class="">
-        <div id="blogPanel"></div>
-        <div id="user"></div>
-    </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5 col-6-lg">
+            <div id="blogPanel"></div>
+            <div id="user"></div>
+        </div>
 
  
 
@@ -144,12 +146,9 @@
 
 </body>
 </html>
-        <script src="main.js"></script>
-        <script src="public/js/blogCard.js"></script>
+    <script src="main.js"></script>
+    <script src="public/js/blogCard.js"></script>
     
 </body>
 </html>
 
-
-    <!-- <button id="next">Next</button>
-    <button id="prev">Prev</button> -->
