@@ -47,9 +47,38 @@ async function getPostById(file, destination, id) {
 
 //   getsource(  url,  div ID, postID )
 
+function makeCommentComponent (r) {
+  let html = `
+  <div class="d-flex justify-content-end  m-0 p-0 mt-1 me-2">
+            <!-- Avatar -->
+            <div class="avatar avatar-xs">
+                <img class="rounded-circle mt-1" src="${r.avatar}" alt="${r.display}" width="40" height="40">
+            </div>
+            <div class="ms-2">
+            <!-- Comment by -->
+            <div class="rounded rounded-start-top-0 px-3 py-1 " style="background-color: rgb(233, 231, 231); border-radius:10px;">
+              
+              <p class="small mb-0  p-0 m-0"><strong>${r.author}</strong></p>
+              <div class="d-flex justify-content-between">
+                <p class="mb-0 ">${r.comment} </p>
+              </div>
+            </div>
+            <p class="small">${r.date}</p>
 
+          </div>
+        </div>
+  `;
+  return html;
+
+}
 
 panel.innerHTML = getPostById(postIdURL, divId, postId);
+
+function populateUserIdInput(t) {
+ document.getElementById('userId').value = t;
+ getUser(t);
+}
+
 
 function getId(t) {
     getPostById(postIdURL, divId, t)
@@ -62,26 +91,7 @@ async function getCommentById(id) {
     let result = await data.json();
     result.forEach(r => {
         // cont.innerHTML += `<li>` + r.comment + `${r.author}</li><br>`
-        let html = `
-        <div class="d-flex justify-content-end  m-0 p-0 mt-1 me-2">
-                  <!-- Avatar -->
-                  <div class="avatar avatar-xs">
-                      <img class="rounded-circle mt-1" src="${r.avatar}" alt="${r.title}" width="40" height="40">
-                  </div>
-                  <div class="ms-2">
-                  <!-- Comment by -->
-                  <div class="rounded rounded-start-top-0 px-3 py-1 " style="background-color: rgb(233, 231, 231); border-radius:10px;">
-                    
-                    <p class="small mb-0  p-0 m-0"><strong>${r.author}</strong></p>
-                    <div class="d-flex justify-content-between">
-                      <p class="mb-0 ">${r.comment} </p>
-                    </div>
-                  </div>
-                  <p class="small">${r.date}</p>
-
-                </div>
-              </div>
-        `;
+        let html = makeCommentComponent(r)
         cont.innerHTML += html;
     });
 
@@ -102,17 +112,50 @@ async function getUser(i) {
     let comment = document.getElementById('addComment').value;
     document.getElementById('comment').value = comment;
 
-  
 }
 
-function addComment() {
-    let user = document.getElementById('user').value ;
+function handleAddComment() {
+  
+    let user = document.getElementById('user').value;
     let display = document.getElementById('display').value;
-    let password = document.getElementById('password').value;
-    let email = document.getElementById('email').value;
+    let avatar = document.getElementById('avatar').value;
+    let comment = document.getElementById('comment').value;
+    let post = document.getElementById('getId').value;
     
 
-    alert(display)
+    let com = {user: user, display: display, avatar: avatar, comment: comment, post: post}
+    let urlapi = `https://mysite.boxcar.site/post-comment`;
+    // urlapi = `http://127.0.0.1:5000/post-comment`;
+
+    if (display == '' )  { alert('Please select user details'); return null}
+    if (comment == '') { alert('Please enter comment'); return null}
+    if (post == '') { alert('Please get post ID'); return}
+    if (comment == '') { document.getElementById('comment').value = document.getElementById('addComment') };
+
+    var params = `display=${com.display}&&user=${com.user}&&comment=${com.comment}&&avatar=${com.avatar}&&post=${com.post}`;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let html = makeCommentComponent(com);
+            document.querySelector('.commentPanel').innerHTML += html;
+
+            document.getElementById('user').value = '';
+            document.getElementById('display').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('avatar').value = '';
+            document.getElementById('post').value = '';
+            document.getElementById('comment').value = '';
+            document.getElementById('userId').value = '';
+
+
+        }
+    };
+    
+    xmlhttp.open("POST", urlapi, true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send(params);
+
 }
 
 
@@ -157,7 +200,7 @@ function blogCard(obj) {
             <div class="d-flex mb-2">
                 <label for="comment" class="commentLabel" hidden>Comment</label>
                 <input id="addComment" type="text" class="commentText">
-                <button id="commentAddBtn" onclick='addComment()'>Add</button>
+                <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
             </div> 
 
             <button id="commentBtn" class="commentBtn">Comments</button>

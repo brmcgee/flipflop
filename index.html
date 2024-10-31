@@ -36,14 +36,34 @@
             <div class="mx-auto">
                 <label class="m-2"><input id="getId" type="number" value="142" onchange="getId(this.value)"> Post Id</label>
                 <label class="m-2"><input id="userId" type="text" value="" onchange="getUser(this.value)"> User Name</label>
+                <select name="userList" id="userList" onchange="populateUserIdInput(this.value)">
+                    <option value="Brian M">Brian M</option>
+                    <option value="Guest">Guest</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="Brian M">Brian M</option>
+                    <option value="Lady G">Lady G</option>
+                    <option value="Snoop D">Snoop D</option>
+                    <option value="Hootie">Hootie</option>
+                    <option value="Trump">Trump</option>
+                    <option value="Zeva">Zeva</option>
+                    <option value="Mr. Froggy">Mr. Froggy</option>
+                    <option value="Pete">Pete</option>
+                    <option value="Hester">Hester</option>
+                    <option value="Donald Ducky">Donald Ducky</option>
+                    <option value="News">News</option>
+                    <option value="Jinko">Jinko</option>
+                    <option value="Casper">Casper</option>
+                    <option value="Bonita Wilson">Bonita Wilson</option>
+
+                </select>
             </div>
 
 
-            <form  action="https://mysite.boxcar.site/post-comment" method="post"  
-                    class="d-flex flex-column mx-auto mt-3 p-2 border border-secondary rounded " style="max-width: 300px;">
+            <!-- <form  action="https://mysite.boxcar.site/post-comment" method="post"  
+                    class="d-flex flex-column mx-auto mt-3 p-2 border border-secondary rounded " style="max-width: 300px;"> -->
 
-            <!-- <form  action="http://127.0.0.1:5000/post-comment" method="post"  
-                    class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;"> -->
+            <form   
+                    class="d-flex flex-column m-1 p-3 border border-dark " style="max-width: 300px;">
                 <label for="post">post</label>
                 <input type="text" name="post" id="post">
 
@@ -66,7 +86,7 @@
                 <input type="text" name="comment" id="comment">
 
                 <br> 
-                <button type="submit" class="btn btn-secondary">Submit</button>
+                <button onclick="handleAddComment()" type="button" class="btn btn-secondary">Submit</button>
             </form>
 
         </div>
