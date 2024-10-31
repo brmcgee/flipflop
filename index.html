@@ -24,78 +24,44 @@
       <ul id="category" class="max-width-750"></ul>
 
       <span class="ms-1"><input id="getId" type="number" value="119" onchange="getId(this.value)"></span>
+      <span class="ms-1"><input id="userId" type="text" value="" onchange="getUser(this.value)">User
+       
+
+        <form  action="https://mysite.boxcar.site/post-comment" method="get"  class="d-flex flex-column m-1 p-1" style="max-width: 300px;">
+
+        <!-- <form  action="http://127.0.0.1:5000/post-comment" method="get"  class="d-flex flex-column m-1 p-1" style="max-width: 300px;"> -->
+          
+          
+          <label for="post">post</label>
+          <input type="text" name="post" id="post">
+
+          <label for="user">user</label>
+          <input type="text" name="user" id="user">
+          
+          <label for="display" >display</label>
+          <input type="text" name="display" id="display" value="brian">
+          
+          <label for="password">password</label>
+          <input type="text" name="password" id="password">
+          
+          <label for="email">email</label>
+          <input type="text" name="email" id="email"> 
+          
+          <label for="avatar">avatar</label>
+          <input type="text" name="avatar" id="avatar"> 
+          <br> 
+        <button type="submit">Submit</button>
+        </form>
+
+
       <div id="blogPanel"></div>
-
       <div id="root"></div>
-
       <div id="user"></div>
 
 
 
-    <!-- blog  -->
 
 
-
-      
-
-    <hr class="m-5">
-
-
-
-
-
-
-
-
-    <!-- add user  -->
-    <div class="container-fluid mt-2 border px-2 py-1 bg-light" style="max-width:620px;">
-      <form action="http://mysite.boxcar.site/add-user" method="get" class="form-group border-0">
-        <div class="row">
-
-            <div class="col-12">
-                <label for="display">Display name</label>
-                <input type="text" name="display" id="display" placeholder="display name" class="form-control bg-light  my-1 text-center" required> 
-            </div>
-            <div class="col-12">
-                <label for="email">Email</label>
-                <input type="text" name="email" placeholder="email" id="email" class="form-control bg-light text-center" required> 
-            </div>
-            <div class="col-12">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password" placeholder="password"  class="form-control bg-light text-center" required> 
-            </div>
-
-
-            <div class="form-group p-1 row">
-                <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
-                  <label for="text">URL for avatar</label>
-                  <input type="text" name="avatar" id="avatar" placeholder="avatar URL" class="form-control bg-light  my-1 text-center" required onchange="document.getElementById('img_up1').src=`${this.value}`">
-                </div>
-              <div class="col-sm-12 col-md-12">
-                <img id="img_up1" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="rounded-circle mt-1 rounded float-end" alt="upload image" width='120' height='120'/>
-              </div>
-            </div>
-
-           
-
-            <div class="col-12">
-                <label for="authId"  hidden>Auth ID</label>
-                <input type="text" name="authId" value="0" class="form-control bg-light  my-1 text-center" hidden>
-            </div>
-            <div class="col-12">
-                <label for="date" hidden >Date</label>
-                <input type="date"  hidden name="date" placeholder="date" value="" class="form-control bg-light  my-1 text-center">
-            </div>
-        </div> 
-        
-        <a href="/" class="btn btn-dark" aria-current="page">Home</a>
-
-        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-
-        
-      </form>
-      <button id="btnUser" class="btn btn-primary" onclick="addUser()">Add</button>
-    </div>
 
     <!-- add post  -->
     <!-- <div class="container-fluid mt-2 border px-2 py-1 bg-white" style="max-width:620px;">
@@ -154,9 +120,6 @@
           <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
         </form>
       </div> -->
-
-
-
 
 
 

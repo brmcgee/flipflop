@@ -87,7 +87,30 @@ async function getCommentById(id) {
 
 }
 
+let userChip = [];
+async function getUser(i) {
 
+    let data = await fetch(`https://www.mysite.boxcar.site/users/${i}`);
+    let r = await data.json();
+
+    document.getElementById('user').value = r.userId;
+    document.getElementById('display').value = r.displayName;
+    document.getElementById('password').value = r.user_password;
+    document.getElementById('email').value = r.email;
+    document.getElementById('avatar').value = r.avatar;
+    document.getElementById('post').value = postId;
+  
+}
+
+function addComment() {
+    let user = document.getElementById('user').value ;
+    let display = document.getElementById('display').value;
+    let password = document.getElementById('password').value;
+    let email = document.getElementById('email').value;
+    
+
+    alert(display)
+}
 
 
 
@@ -131,7 +154,7 @@ function blogCard(obj) {
             <div class="d-flex mb-2">
                 <label for="comment" class="commentLabel" hidden>Comment</label>
                 <input id="addComment" type="text" class="commentText">
-                <button id="commentAddBtn${postId}">Add</button>
+                <button id="commentAddBtn" onclick='addComment()'>Add</button>
             </div> 
 
             <button id="commentBtn" class="commentBtn">Comments</button>
