@@ -50,7 +50,7 @@ async function getPostById(file, destination, id) {
 // com = {user: user, display: display, avatar: avatar, comment: comment, post: post}
 function makeCommentComponent (r) {
   let html = `
-  <div class="d-flex justify-content-end  m-0 p-0 mt-1 me-2">
+  <div class="d-flex justify-content-end  m-0 p-0 mt-1">
             <!-- Avatar -->
             <div class="avatar avatar-xs">
                 <img class="rounded-circle mt-1" src="${r.avatar}" alt="${r.display}" width="40" height="40">
@@ -130,8 +130,11 @@ let commentBar =  `
   
 <div id="commentBar"class=" bg-light  mt-5 commentInput p-2 d-flex my-2 mb-4 justify-content-between">
   <label for="comment" class="commentLabel" hidden>Comment</label>
-  <input id="addComment" type="text" class="commentText" placeholder="..commenting as ${document.getElementById('userList').value}">
-  <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
+  <input id="addComment" type="text" class="commentText" 
+      placeholder="..commenting as ${document.getElementById('userList').value}">
+  <button id="commentAddBtn" onclick='handleAddComment()' class="bg-transparent">
+    <span class=" material-symbols-outlined">add</span>
+  </button>
 </div> 
 `;
 function handleAddComment() {
