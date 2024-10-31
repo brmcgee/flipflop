@@ -40,6 +40,7 @@ async function getPostById(file, destination, id) {
         } else {
           p.style.maxHeight = panel.scrollHeight + "px";
           getCommentById(id);
+          
         } 
     });
     }
@@ -97,13 +98,13 @@ async function getCommentById(id) {
     cont.innerHTML = '';
     let data = await fetch(`https://mysite.boxcar.site/comments/${id}`);
     let result = await data.json();
-
+    let i=0;
     result.forEach(r => {
-        // cont.innerHTML += `<li>` + r.comment + `${r.author}</li><br>`
         let html = makeCommentComponent(r)
         cont.innerHTML += html;
     });
-    cont.innerHTML += commentBar;
+
+    // cont.innerHTML += commentBar;
 
 
 }
@@ -207,11 +208,20 @@ function blogCard(obj) {
 
         <div class="card-footer">
 
-
-            <button id="commentBtn" class="commentBtn">
+        
+            <button id="commentBtn" class="commentBtn"> 
               <span class="material-symbols-outlined">comment</span>
             </button>
             
+
+            <div id="commentBar"class=" bg-light commentInput p-2 d-flex my-2 mb-4 justify-content-between">
+              <label for="comment" class="commentLabel" hidden>Comment</label>
+              <input id="addComment" type="text" class="commentText" 
+                  placeholder="..commenting as ${document.getElementById('userList').value}">
+              <button id="commentAddBtn" onclick='handleAddComment()' class="bg-transparent">
+                <span class=" material-symbols-outlined">add</span>
+              </button>
+            </div> 
             <div class="commentPanel">
            
             </div> 
