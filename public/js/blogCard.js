@@ -55,7 +55,8 @@ function makeCommentComponent (r) {
             </div>
             <div class="ms-2">
             <!-- Comment by -->
-            <div class="rounded rounded-start-top-0 px-3 py-0 " style="background-color: rgb(233, 231, 231); border-radius:10px;">
+            <div class="rounded rounded-start-top-0 px-3 py-0 " 
+                  style="background-color: rgb(233, 231, 231); border-radius:10px;">
               
               <p class="small mb-0  p-0 m-0"><strong>${r.author || r.display}</strong></p>
               <div class="d-flex justify-content-between">
@@ -67,13 +68,14 @@ function makeCommentComponent (r) {
           </div>
         </div>
   `;
+
   return html;
 
 }
 // page load beginning post 
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(firstPost, 2000)
-})
+
+setTimeout(firstPost, 500)
+
 function firstPost(){
   panel.innerHTML = getPostById(postIdURL, divId, postId);
 }
@@ -93,11 +95,20 @@ async function getCommentById(id) {
     cont.innerHTML = '';
     let data = await fetch(`https://mysite.boxcar.site/comments/${id}`);
     let result = await data.json();
+    cont.innerHTML += `
+  
+      <div class="commentInput border border-secondary rounded shadow p-2 d-flex my-2 mb-4 justify-content-between">
+        <label for="comment" class="commentLabel" hidden>Comment</label>
+        <input id="addComment" type="text" class="commentText" placeholder="..commenting as ${document.getElementById('userList').value}">
+        <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
+    </div> 
+  `
     result.forEach(r => {
         // cont.innerHTML += `<li>` + r.comment + `${r.author}</li><br>`
         let html = makeCommentComponent(r)
         cont.innerHTML += html;
     });
+
 
 }
 
@@ -165,21 +176,11 @@ function handleAddComment() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 function blogCard(obj) {
 
     let html = `
     
-    <div class="card mb-2 mx-auto" style="max-width:27rem; ">
+    <div class="blog-card card mb-2 mx-auto" style="max-width:27rem; ">
 
         <div class="card-header d-flex align-items-center">
           <span class="avatar bg-333 p-1 fs-5 rounded">
@@ -197,21 +198,21 @@ function blogCard(obj) {
           <p class="card-text">
           ${obj.body}
           </p>
-          <p><span class="alert my-0 py-2 bg-333 text-white float">${obj.category}</span ><span class="small float-end me-2">${obj.author}</span></p>
+            <p><span class="alert my-0 py-2 bg-333 text-white float">${obj.category}</span >
+            <span class="small float-end me-2">${obj.author}</span>
+          </p>
 
           
         </div>
 
         <div class="card-footer">
-            <div class="d-flex mb-2">
-                <label for="comment" class="commentLabel" hidden>Comment</label>
-                <input id="addComment" type="text" class="commentText">
-                <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
-            </div> 
 
-            <button id="commentBtn" class="commentBtn">Comments</button>
+
+            <button id="commentBtn" class="commentBtn">
+              <span class="material-symbols-outlined">comment</span>
+            </button>
             <div class="commentPanel">
-              <p>${postId}</p>
+           
             </div> 
     
         </div>
@@ -224,3 +225,8 @@ function blogCard(obj) {
 }
 
 
+{/* <div class="d-flex mb-2">
+<label for="comment" class="commentLabel" hidden>Comment</label>
+<input id="addComment" type="text" class="commentText">
+<button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
+</div>  */}

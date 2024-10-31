@@ -1,6 +1,10 @@
+.blog-card {
+  border-radius: 10px;
+
+}
 .commentBtn {
-    background-color: #eee;
-    color: #444;
+    background-color: #1558d4;
+    color: #f1f1f1;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -9,15 +13,17 @@
     outline: none;
     font-size: 15px;
     transition: 0.4s;
+    border-radius: 10px;
+
   }
   
   .active, .commentBtn:hover {
-    background-color: #ccc;
+    background-color: rgb(13, 116, 184);
   }
   
   .commentBtn:after {
     content: '\002B';
-    color: #777;
+    color: #1715a8;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -26,13 +32,31 @@
   .active:after {
     content: "\2212";
   }
+
+
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
+
   
   .commentPanel {
     padding: 0 18px;
     background-color: rgb(250, 248, 248);
+    color: #000000;
+    border-radius: 6px;
     max-height: 0;
     overflow-y: auto;
     transition: max-height 0.2s ease-out;
+    position: absolute;
+    bottom: 50px;
+    left: 25px;
+    box-shadow: 1px 9px 22px #272727;
+    width: 89%;
 
   }
 
@@ -44,7 +68,8 @@
     margin-right: 18px;
     font-size: 17px;
     outline: none;
-    width: 100%;
+    color: #333;
+
   }
 
   #commentAddBtn {
@@ -60,7 +85,7 @@
   }
   #commentAddBtn:hover{
     background-color: #ccc;
-    transition: background-color 0.2s ease-out;
+    transition: background-color 0.1s linear;
   }
   .commentLabel {
     border: none;
