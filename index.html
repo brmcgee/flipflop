@@ -14,17 +14,156 @@
 </head>
 <body>
 
-      <div class="d-flex justify-content-between bg-secondary text-light p-3 rounded">
+      <div class="d-flex justify-content-between bg-333 shadow text-light p-3 rounded">
         <h3 class="">Blogsby great blogs @</h3>
+        <input id="getId" type="number" value="119" onchange="getId(this.value)">
         <div class=""><a href="http://mysite.boxcar.site/create" class="text-warning bg-dark rounded p-1 ms-1">Create Post</a></div>
       </div>
 
 
       <ul id="category" class="max-width-750"></ul>
+
+      <div id="blogPanel"></div>
+
       <div id="root"></div>
 
+      <div id="user"></div>
+
+
+
+    <!-- blog  -->
+
+
+
+      
+
+    <hr class="m-5">
+
+
+
+
+
+
+
+
+    <!-- add user  -->
+    <div class="container-fluid mt-2 border px-2 py-1 bg-light" style="max-width:620px;">
+      <form action="http://mysite.boxcar.site/add-user" method="get" class="form-group border-0">
+        <div class="row">
+
+            <div class="col-12">
+                <label for="display">Display name</label>
+                <input type="text" name="display" id="display" placeholder="display name" class="form-control bg-light  my-1 text-center" required> 
+            </div>
+            <div class="col-12">
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="email" id="email" class="form-control bg-light text-center" required> 
+            </div>
+            <div class="col-12">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" placeholder="password"  class="form-control bg-light text-center" required> 
+            </div>
+
+
+            <div class="form-group p-1 row">
+                <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                  <label for="text">URL for avatar</label>
+                  <input type="text" name="avatar" id="avatar" placeholder="avatar URL" class="form-control bg-light  my-1 text-center" required onchange="document.getElementById('img_up1').src=`${this.value}`">
+                </div>
+              <div class="col-sm-12 col-md-12">
+                <img id="img_up1" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="rounded-circle mt-1 rounded float-end" alt="upload image" width='120' height='120'/>
+              </div>
+            </div>
+
+           
+
+            <div class="col-12">
+                <label for="authId"  hidden>Auth ID</label>
+                <input type="text" name="authId" value="0" class="form-control bg-light  my-1 text-center" hidden>
+            </div>
+            <div class="col-12">
+                <label for="date" hidden >Date</label>
+                <input type="date"  hidden name="date" placeholder="date" value="" class="form-control bg-light  my-1 text-center">
+            </div>
+        </div> 
+        
+        <a href="/" class="btn btn-dark" aria-current="page">Home</a>
+
+        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+
+        
+      </form>
+      <button id="btnUser" class="btn btn-primary" onclick="addUser()">Add</button>
+    </div>
+
+    <!-- add post  -->
+    <!-- <div class="container-fluid mt-2 border px-2 py-1 bg-white" style="max-width:620px;">
+        <form action="http://mysite.boxcar.site/add-post" method="get" class="form-group border-0">
+          <div class="row">
+  
+              <div class="col-12">
+                  <label for="title">Title</label>
+                  <input type="text" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
+              </div>
+              <div class="col-12">
+                  <label for="category">Category</label>
+                  <input type="text" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
+              </div>
+              <div class="col-12">
+                  <label for="body">Post Content</label>
+                  <textarea  type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
+              </div>
+  
+              <div class="form-group p-1 row">
+                  <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                    <label for="text">URL for image</label>
+                    <input type="text" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required onchange="document.getElementById('img_up1').src=`${this.value}`">
+                  </div>
+                <div class="col-sm-12 col-md-12">
+                  <img id="img_up1" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="mt-1 rounded float-end" alt="upload image" width='120' height='120'/>
+                </div>
+              </div>
+  
+              <div class="col-12">
+                  <label for="author">Author</label>
+                  <input type="text" name="author" placeholder="author"  class="form-control bg-light text-center"> 
+              </div>
+              <div class="form-group p-1 row">
+                  <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                      <label for="text">URL for avatar</label>
+                      <input type="text"  name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar"onchange="document.getElementById('img_up2').src=`${this.value}`">
+                      <div class="col-sm-12 col-md-12">
+                          <img id="img_up2" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="mt-1 rounded float-end" alt="upload image" width='120' height='120'/>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="col-12">
+                  <label for="authId"  hidden>Auth ID</label>
+                  <input type="text" name="authId" value="0" class="form-control bg-light  my-1 text-center" hidden>
+              </div>
+              <div class="col-12">
+                  <label for="date" >Date</label>
+                  <input type="date"  name="date" placeholder="date" value="" class="form-control bg-light  my-1 text-center">
+              </div>
+          </div> 
+          
+          <a href="/" class="btn btn-dark" aria-current="page">Home</a>
+  
+          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div> -->
+
+
+
+
+
+
+</body>
+</html>
+        <script src="main.js"></script>
+        <script src="public/js/blogCard.js"></script>
     
-    <script src="main.js"></script>
 </body>
 </html>
 

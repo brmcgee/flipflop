@@ -1,3 +1,4 @@
+
 const inputElem = document.querySelector('#blogInput');
 const root = document.getElementById('root');
 const blogsByIndex = [];
@@ -25,7 +26,14 @@ async function getData(file) {
       getAllCategorys();
       populateCategoryElem();
       addBtnEventListener()
+    //   blogs.forEach(b => {
+    //     document.getElementById('blogPanel').innerHTML += 
+    //             getPostById('https://mysite.boxcar.site/posts', 'blogPanel', b.postId);
+
+    //   })
 }
+
+
 
 function addBtnEventListener() {
     btns = document.querySelectorAll('.categoryBtn');
@@ -128,7 +136,29 @@ function blogTemplate(b) {
 
 
 
+let userBtn = document.getElementById('userBtn');
+userBtn.addEventListener('click', () => { alert('hello')})
 
+
+function addUser() {
+    let display = document.getElementById('display').value;
+    let avatar = document.getElementById('avatar').value;
+    let password = document.getElementById('password').value;
+    let email = document.getElementById('email').value;
+    
+    
+  
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("user").innerHTML = this.responseText;
+        }
+    };
+    xmlhttp.open("GET",`http://mysite.boxcar.site/add-user?display=${display}&email=${email}&password=${password}&avatar=${avatar}&date=`,true);
+    xmlhttp.send();
+        
+      
+}
 
 
 

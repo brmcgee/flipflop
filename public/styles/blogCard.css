@@ -1,0 +1,70 @@
+.commentBtn {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+  }
+  
+  .active, .commentBtn:hover {
+    background-color: #ccc;
+  }
+  
+  .commentBtn:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2212";
+  }
+  
+  .commentPanel {
+    padding: 0 18px;
+    background-color: rgb(250, 248, 248);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+
+  }
+
+  .commentText {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 18px;
+    font-size: 17px;
+    outline: none;
+    width: 100%;
+  }
+
+  #commentAddBtn {
+    float: right;
+    padding: 10px;
+    margin-top: 8px;
+    margin-right: 2px;
+    height:45px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  #commentAddBtn:hover{
+    background-color: #ccc;
+    transition: background-color 0.2s ease-out;
+  }
+  .commentLabel {
+    border: none;
+    margin-top: 8px;
+    margin-right: 0px;
+    font-size: 14px;
+  }
