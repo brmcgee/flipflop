@@ -100,18 +100,18 @@ async function getCommentById(id) {
     let result = await data.json();
     let i=0;
     result.forEach(r => {
-        let html = makeCommentComponent(r)
+        let html = makeCommentComponent(r);
         cont.innerHTML += html;
     });
 
-    // cont.innerHTML += commentBar;
+    cont.innerHTML += commentBar;
 
 
 }
 
 let userChip = [];
 async function getUser(i) {
-
+ 
     let data = await fetch(`https://www.mysite.boxcar.site/users/${i}`);
     let r = await data.json();
 
@@ -125,14 +125,17 @@ async function getUser(i) {
       document.getElementById('comment').value = comment;
     let userImg = r.avatar;
       (document.getElementById('userAvatarImg').src) = userImg;
+    document.getElementsByName('comPlaceholder')[0].placeholder = '... commenting as ' + r.displayName;
+    document.getElementsByName('comPlaceholder')[0].style.fontSize = '12px';
+
     
 }
 let commentBar =  `
   
-<div id="commentBar"class=" bg-light  mt-5 commentInput p-2 d-flex my-2 mb-4 justify-content-between">
+<div id="commentBar"class=" bg-light  mt-5 commentInput p-1 d-flex my-2 mb-4 justify-content-between">
   <label for="comment" class="commentLabel" hidden>Comment</label>
   <input id="addComment" type="text" class="commentText" 
-      placeholder="..commenting as ${document.getElementById('userList').value}">
+      placeholder="..commenting as ">
   <button id="commentAddBtn" onclick='handleAddComment()' class="bg-transparent">
     <span class=" material-symbols-outlined">add</span>
   </button>
@@ -208,23 +211,25 @@ function blogCard(obj) {
 
         <div class="card-footer">
 
-        
+          <div class="comBtnGroup">
             <button id="commentBtn" class="commentBtn"> 
               <span class="material-symbols-outlined">comment</span>
             </button>
             
 
-            <div id="commentBar"class=" bg-light commentInput p-2 d-flex my-2 mb-4 justify-content-between">
+            <div id="commentBar"class=" bg-light commentInput p-1 d-flex my-2 mb-4 justify-content-between">
               <label for="comment" class="commentLabel" hidden>Comment</label>
-              <input id="addComment" type="text" class="commentText" 
-                  placeholder="..commenting as ${document.getElementById('userList').value}">
+              <input id="addComment" type="text" class="commentText" name="comPlaceholder" 
+                  placeholder=".... post a comment">
               <button id="commentAddBtn" onclick='handleAddComment()' class="bg-transparent">
                 <span class=" material-symbols-outlined">add</span>
               </button>
             </div> 
+
             <div class="commentPanel">
            
             </div> 
+          </div>
     
         </div>
       </div>    
