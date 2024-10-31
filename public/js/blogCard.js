@@ -104,10 +104,11 @@ async function getCommentById(id) {
         cont.innerHTML += html;
     });
 
-    cont.innerHTML += commentBar;
-
-
+    // cont.innerHTML += commentBar;
 }
+
+
+
 
 let userChip = [];
 async function getUser(i) {
@@ -125,6 +126,7 @@ async function getUser(i) {
       document.getElementById('comment').value = comment;
     let userImg = r.avatar;
       (document.getElementById('userAvatarImg').src) = userImg;
+
     document.getElementsByName('comPlaceholder')[0].placeholder = '... commenting as ' + r.displayName;
     document.getElementsByName('comPlaceholder')[0].style.fontSize = '12px';
 
@@ -173,11 +175,13 @@ function handleAddComment() {
         }
     };
     
+  
     xmlhttp.open("POST", urlapi, true);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xmlhttp.send(params);
 
 }
+
 
 
 function blogCard(obj) {
