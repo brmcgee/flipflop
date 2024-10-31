@@ -37,10 +37,11 @@ async function getPostById(file, destination, id) {
         p.style.maxHeight = null;
         } else {
         p.style.maxHeight = panel.scrollHeight + "px";
+        getCommentById(id);
         } 
     });
     }
-    getCommentById(id)
+    
 
 }
 
@@ -65,7 +66,7 @@ async function getCommentById(id) {
         <div class="d-flex justify-content-end  m-0 p-0 mt-1 me-2">
                   <!-- Avatar -->
                   <div class="avatar avatar-xs">
-                      <img class="rounded-circle mt-1" src="${r.avatar}" alt="russ_mc" width="40" height="40">
+                      <img class="rounded-circle mt-1" src="${r.avatar}" alt="${r.title}" width="40" height="40">
                   </div>
                   <div class="ms-2">
                   <!-- Comment by -->
@@ -73,7 +74,7 @@ async function getCommentById(id) {
                     
                     <p class="small mb-0  p-0 m-0"><strong>${r.author}</strong></p>
                     <div class="d-flex justify-content-between">
-                      <p class="mb-0 ">Nice family photo!!! </p>
+                      <p class="mb-0 ">${r.comment} </p>
                     </div>
                   </div>
                   <p class="small">${r.date}</p>

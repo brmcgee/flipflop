@@ -36,7 +36,7 @@ async function getData(file) {
 
 
 function addBtnEventListener() {
-    btns = document.querySelectorAll('.categoryBtn');
+    btns = document.querySelectorAll('.catBtn');
     btns.forEach(b => {
         b.addEventListener('click', () => {blogTemplateByCatgeory(b.innerHTML)})
     })
