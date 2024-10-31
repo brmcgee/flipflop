@@ -73,7 +73,7 @@ function getAllCategorys(){
 function populateCategoryElem() {
     let count = 0;
     catArr.forEach(c => {
-        catElem.innerHTML += `<button id=btn${c} class='categoryBtn'>` + c + '</button>';
+        catElem.innerHTML += `<button id=btn${c} class='catBtn'>` + c + '</button>';
         count++;
     })
 }
