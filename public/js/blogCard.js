@@ -16,7 +16,6 @@ let loading = true;
 
 
 panel.classList.add('loader');
-panel.innerHTML = 'loading.......'
 panel.classList.add('mx-auto');
 
 async function getPostById(file, destination, id) {
@@ -25,28 +24,20 @@ async function getPostById(file, destination, id) {
     let result = await data.json();
 
     let html = blogCard(result);
-
-    
-    
-    loading = false;
-
-    container.innerHTML = html;
-   
-    panel.classList.remove('loader');
-
-   
+      loading = false;
+      container.innerHTML = html;
+      panel.classList.remove('loader');
 
     var i;
-
     for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var p = document.querySelector('.commentPanel');
         if (p.style.maxHeight) {
-        p.style.maxHeight = null;
+          p.style.maxHeight = null;
         } else {
-        p.style.maxHeight = panel.scrollHeight + "px";
-        getCommentById(id);
+          p.style.maxHeight = panel.scrollHeight + "px";
+          getCommentById(id);
         } 
     });
     }
@@ -54,8 +45,7 @@ async function getPostById(file, destination, id) {
 
 }
 
-//   getsource(  url,  div ID, postID )
-
+// com = {user: user, display: display, avatar: avatar, comment: comment, post: post}
 function makeCommentComponent (r) {
   let html = `
   <div class="d-flex justify-content-end  m-0 p-0 mt-1 me-2">
@@ -65,14 +55,14 @@ function makeCommentComponent (r) {
             </div>
             <div class="ms-2">
             <!-- Comment by -->
-            <div class="rounded rounded-start-top-0 px-3 py-1 " style="background-color: rgb(233, 231, 231); border-radius:10px;">
+            <div class="rounded rounded-start-top-0 px-3 py-0 " style="background-color: rgb(233, 231, 231); border-radius:10px;">
               
-              <p class="small mb-0  p-0 m-0"><strong>${r.author}</strong></p>
+              <p class="small mb-0  p-0 m-0"><strong>${r.author || r.display}</strong></p>
               <div class="d-flex justify-content-between">
                 <p class="mb-0 ">${r.comment} </p>
               </div>
             </div>
-            <p class="small">${r.date}</p>
+            <p class="small">${r.date || 'Just now ...'}</p>
 
           </div>
         </div>
@@ -80,8 +70,13 @@ function makeCommentComponent (r) {
   return html;
 
 }
-
-panel.innerHTML = getPostById(postIdURL, divId, postId);
+// page load beginning post 
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(firstPost, 2000)
+})
+function firstPost(){
+  panel.innerHTML = getPostById(postIdURL, divId, postId);
+}
 
 function populateUserIdInput(t) {
  document.getElementById('userId').value = t;
@@ -119,11 +114,9 @@ async function getUser(i) {
     document.getElementById('avatar').value = r.avatar;
     document.getElementById('post').value = document.getElementById('getId').value;
     let comment = document.getElementById('addComment').value;
-    document.getElementById('comment').value = comment;
+      document.getElementById('comment').value = comment;
     let userImg = r.avatar;
-    (document.getElementById('userAvatarImg').src) = userImg;
-    
-
+      (document.getElementById('userAvatarImg').src) = userImg;
     
 }
 
@@ -142,7 +135,7 @@ function handleAddComment() {
 
     if (display == '' )  { alert('Please select user details'); return null}
     if (comment == '') { alert('Please enter comment'); return null}
-    if (post == '') { alert('Please get post ID'); return}
+    if (post == '') { alert('Please get post ID'); return null}
     if (comment == '') { document.getElementById('comment').value = document.getElementById('addComment') };
 
     var params = `display=${com.display}&&user=${com.user}&&comment=${com.comment}&&avatar=${com.avatar}&&post=${com.post}`;
@@ -151,7 +144,6 @@ function handleAddComment() {
         if (this.readyState == 4 && this.status == 200) {
             let html = makeCommentComponent(com);
             document.querySelector('.commentPanel').innerHTML += html;
-
             // document.getElementById('user').value = '';
             // document.getElementById('display').value = '';
             // document.getElementById('password').value = '';
