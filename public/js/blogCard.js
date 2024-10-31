@@ -9,7 +9,9 @@ let panel = document.getElementById(divId);
 
 let loading = true;
 
-
+document.getElementById('userList').addEventListener('onchange', () => {
+  alert('Done')
+})
 
 // comment section open panel 
 
@@ -95,19 +97,13 @@ async function getCommentById(id) {
     cont.innerHTML = '';
     let data = await fetch(`https://mysite.boxcar.site/comments/${id}`);
     let result = await data.json();
-    cont.innerHTML += `
-  
-      <div class="commentInput border border-secondary rounded shadow p-2 d-flex my-2 mb-4 justify-content-between">
-        <label for="comment" class="commentLabel" hidden>Comment</label>
-        <input id="addComment" type="text" class="commentText" placeholder="..commenting as ${document.getElementById('userList').value}">
-        <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
-    </div> 
-  `
+
     result.forEach(r => {
         // cont.innerHTML += `<li>` + r.comment + `${r.author}</li><br>`
         let html = makeCommentComponent(r)
         cont.innerHTML += html;
     });
+    cont.innerHTML += commentBar;
 
 
 }
@@ -130,7 +126,14 @@ async function getUser(i) {
       (document.getElementById('userAvatarImg').src) = userImg;
     
 }
-
+let commentBar =  `
+  
+<div id="commentBar"class=" bg-light  mt-5 commentInput p-2 d-flex my-2 mb-4 justify-content-between">
+  <label for="comment" class="commentLabel" hidden>Comment</label>
+  <input id="addComment" type="text" class="commentText" placeholder="..commenting as ${document.getElementById('userList').value}">
+  <button id="commentAddBtn" onclick='handleAddComment()'>Add</button>
+</div> 
+`;
 function handleAddComment() {
   
     let user = document.getElementById('user').value;
@@ -154,15 +157,9 @@ function handleAddComment() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let html = makeCommentComponent(com);
-            document.querySelector('.commentPanel').innerHTML += html;
-            // document.getElementById('user').value = '';
-            // document.getElementById('display').value = '';
-            // document.getElementById('password').value = '';
-            // document.getElementById('email').value = '';
-            // document.getElementById('avatar').value = '';
-            // document.getElementById('post').value = '';
+            let commentListElem = document.querySelector('.commentPanel');
+            commentListElem.innerHTML += html;
             document.getElementById('comment').value = '';
-            // document.getElementById('userId').value = '';
             document.getElementById('addComment').value = '';
 
 
@@ -211,6 +208,7 @@ function blogCard(obj) {
             <button id="commentBtn" class="commentBtn">
               <span class="material-symbols-outlined">comment</span>
             </button>
+            
             <div class="commentPanel">
            
             </div> 

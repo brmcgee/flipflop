@@ -2,9 +2,17 @@
   border-radius: 10px;
 
 }
+#commentBar{
+  position: relative;
+  bottom: 5px;
+  background-color: #000000;
+}
+#addComment {
+  /* width: 100%; */
+}
 .commentBtn {
-    background-color: #1558d4;
-    color: #f1f1f1;
+    background-color: transparent;
+    color: #1c04f8;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -14,11 +22,12 @@
     font-size: 15px;
     transition: 0.4s;
     border-radius: 10px;
+    width: 90px;
 
   }
   
   .active, .commentBtn:hover {
-    background-color: rgb(13, 116, 184);
+    background-color: rgb(175, 175, 175);
   }
   
   .commentBtn:after {
