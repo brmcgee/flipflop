@@ -78,7 +78,7 @@ function makeCommentComponent (r) {
 }
 // page load beginning post 
 
-setTimeout(firstPost, 1000)
+setTimeout(firstPost, 100)
 
 function firstPost(){
   panel.innerHTML = getPostById(postIdURL, divId, postId);
@@ -144,6 +144,7 @@ let commentBar =  `
   </button>
 </div> 
 `;
+
 function handleAddComment() {
   
     let user = document.getElementById('user').value;
