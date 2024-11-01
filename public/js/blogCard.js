@@ -189,7 +189,7 @@ function blogCard(obj) {
 
     let html = `
     
-    <div class="blog-card card mb-2 mx-auto" style="max-width:27rem; ">
+    <div class="blog-card card mb-2 mx-auto mt-5" style="max-width:27rem; ">
 
         <div class="card-header d-flex align-items-center">
           <span class="avatar bg-333 p-1 fs-5 rounded">

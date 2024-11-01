@@ -3,8 +3,9 @@
   border-bottom: 3px solid grey;
   border-radius: 0;
   height: auto;
-
+  margin-top: 120px;
 }
+
 .comBtnGroup {
   display: flex;
   flex-direction: row-reverse;
@@ -16,20 +17,17 @@
   background-color: #000000;
   padding: 0;
   margin: 0;
-
-
 }
 #addComment {
   /* width: 100%; */
   margin: 0;
   width: 240px;
   max-width: 400px;
-
   padding: 8px;
   border-radius: 15px;
   background-color: #d6d6d6;
-
 }
+
 .card-footer {
   padding: 5px;
   padding-right: 10px;
