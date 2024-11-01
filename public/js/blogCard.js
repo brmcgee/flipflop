@@ -13,9 +13,6 @@ document.getElementById('userList').addEventListener('onchange', () => {
   alert('Done')
 })
 
-// comment section open panel 
-
-
 
 panel.classList.add('loader');
 panel.classList.add('mx-auto');
@@ -29,6 +26,10 @@ async function getPostById(file, destination, id) {
       loading = false;
       container.innerHTML = html;
       panel.classList.remove('loader');
+
+    let userName = document.getElementById('userList').value
+    document.getElementsByName('comPlaceholder')[0].placeholder = '... commenting as ' + userName;
+    document.getElementsByName('comPlaceholder')[0].style.fontSize = '12px';
 
     var i;
     for (i = 0; i < acc.length; i++) {
@@ -134,7 +135,7 @@ async function getUser(i) {
 }
 let commentBar =  `
   
-<div id="commentBar"class=" bg-light  mt-5 commentInput p-1 d-flex my-2 mb-4 justify-content-between">
+<div id="commentBar"class=" bg-light  commentInput d-flex justify-content-between">
   <label for="comment" class="commentLabel" hidden>Comment</label>
   <input id="addComment" type="text" class="commentText" 
       placeholder="..commenting as ">
