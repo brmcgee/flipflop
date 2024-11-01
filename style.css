@@ -74,7 +74,8 @@ a {
 
 /* HTML: <div class="loader"></div> */
 .loader {
-    max-height: 100px;
+    height: 140px;
+    width: 330px;
     aspect-ratio: 2.5;
     --_g: no-repeat radial-gradient(farthest-side,#1b1d20 90%,#df0a0a00);
     background:var(--_g), var(--_g), var(--_g), var(--_g);

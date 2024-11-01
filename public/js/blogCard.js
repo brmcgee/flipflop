@@ -77,7 +77,7 @@ function makeCommentComponent (r) {
 }
 // page load beginning post 
 
-setTimeout(firstPost, 500)
+setTimeout(firstPost, 1000)
 
 function firstPost(){
   panel.innerHTML = getPostById(postIdURL, divId, postId);
