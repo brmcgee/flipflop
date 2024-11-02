@@ -1,4 +1,3 @@
-
 let arr = [];
 var acc = document.getElementsByClassName("commentBtn");
 let fetchHTML = '';
@@ -39,7 +38,7 @@ async function getPostById(file, destination, id) {
         if (p.style.maxHeight) {
           p.style.maxHeight = null;
         } else {
-          p.style.maxHeight = panel.scrollHeight + "px";
+          p.style.maxHeight = panel.scrollHeight - 100 + "px";
           getCommentById(id);
           
         } 
@@ -77,6 +76,7 @@ function makeCommentComponent (r) {
 
 }
 // page load beginning post 
+
 
 setTimeout(firstPost, 100)
 
@@ -243,6 +243,132 @@ function blogCard(obj) {
     
     `;
 
+
+    html = `
+    <style>
+    
+.widget {
+    border: none;
+    box-shadow: 0 2px 0 rgba(0,0,0,.07);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    display: block;
+    max-width: 27rem;
+}
+
+.widget-blog-cover {
+    overflow: hidden;
+    padding-top: 60%;
+}
+
+.widget-blog-cover, .widget-stat-header {
+    position: relative;
+    border-radius: 5px 5px 0 0;
+    margin: -20px -20px 20px;
+}
+
+.animation-grow-hover, .widget-blog .widget-blog-cover img {
+    transition: all .1s ease-in-out;
+}
+
+.widget-blog-cover img:hover{
+    max-width: 110%;
+    min-height: 110%;
+    margin-left: -5%;
+    margin-top: -5%;    
+}
+
+.widget-blog-cover img {
+    position: absolute;
+    // left: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    min-height: 100%;
+}
+
+.widget-blog-author {
+    margin: -20px -20px 0;
+    padding: 10px 20px;
+}
+
+.widget-blog-author-image {
+    float: left;
+    margin-top: -30px;
+    padding: 5px;
+    border-radius: 70px;
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    position: relative;
+}
+
+.widget-blog-author-image img {
+    max-width: 100%;
+    border-radius: 70px;
+}
+
+.text-muted {
+    color: #aab3ba;
+}
+.f-s-11 {
+    font-size: 11px!important;
+}
+
+    </style>
+     <div class="col-xs-12 col-sm-11">
+        <div class="widget widget-blog">
+            <div class="widget-blog-cover">
+                <img src="${obj.img}" alt="">
+            </div>
+            <div class="widget-blog-author">
+                <div class="widget-blog-author-image">
+                    <img src="${obj.authorAvatar}" alt="${obj.title}">
+                </div>
+                <div class="widget-blog-author-info">
+                    <h5 class="m-t-0 m-b-1">${obj.author}</h5>
+                    <p class="text-muted m-0 f-s-11">${obj.category}</p>
+                </div>
+            </div>
+            <div class="widget-blog-content">
+                <h5>${obj.title}</h5>
+                <p>
+            ${obj.body}     
+           </p>
+            </div>
+                    <div class="card-footer">
+
+          <div class="comBtnGroup">
+            <button id="commentBtn" class="commentBtn"> 
+              <span class="material-symbols-outlined">comment</span>
+            </button>
+            
+
+            <div id="commentBar"class=" bg-light commentInput p-1 d-flex my-2 mb-4 justify-content-between">
+              <label for="comment" class="commentLabel" hidden>Comment</label>
+              <input id="addComment" type="text" class="commentText" name="comPlaceholder" 
+                  placeholder=".... post a comment">
+              <button id="commentAddBtn" onclick='handleAddComment()' class="bg-transparent">
+                <span class=" material-symbols-outlined">add</span>
+              </button>
+            </div> 
+
+            <div class="commentPanel">
+           
+            </div> 
+          </div>
+    
+        </div>
+        </div>
+    </div>
+    
+    `
     return html;
 }
 

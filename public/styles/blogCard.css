@@ -87,16 +87,19 @@
     padding: 0 18px;
     background-color: rgb(250, 248, 248);
     color: #000000;
-    border-radius: 6px;
+    border-radius: 2px;
     max-height: 0;
     overflow-y: auto;
     transition: max-height 0.2s ease-out;
     position: absolute;
     bottom: 100px;
-    left: 0px;
-    box-shadow: 1px 9px 22px #272727;
-    width: 100%;
+    left: 4px;
+    box-shadow: 4px 2px 14px #292929;
+    /* inset: 1px; */
+    width: 97%;
     overflow-x: hidden;
+    
+    
 
   }
 
