@@ -1,25 +1,28 @@
 let userRoot = document.getElementById('userRoot');
 let userQuery = "Guest"
 let userUrl = `https://mysite.boxcar.site/users/${userQuery}`;
-
+const navbarRoot = document.getElementById('navbarRoot');
+const friendsRoot = document.getElementById('friendsRoot')
+const photosRoot = document.getElementById('photosRoot');
+const aboutRoot = document.getElementById('aboutRoot');
+const modalsRoot = document.getElementById('modalsRoot');
+const shareRoot = document.getElementById('shareRoot');
 const bg = [`public/assets/bg/fighter.jpg`, `public/assets/bg/lowrider-orange.jpg`, `public/assets/bg/lowrider.jpg`, `public/assets/bg/beach.jpg`, `public/assets/bg/blue-tech.jpg`, `public/assets/bg/waterfall.jpg`, `women-ai.jpg` ];
+
 
 
 function setUserId(val){
     let url = `https://mysite.boxcar.site/users/${val}`;
-    fetchUserData(url);
+    fetchUserData(url); 
 }
-
-
 function randomBg(b){
     let num = Math.floor(Math.random() * b.length - 1 );
     return bg[num];
 }
-
 function userCard(user) {
     let html = 
     `
-  <div class="user-card card mx-auto" style="max-width: 36rem;" 
+  <div class="user-card card mx-auto" style="" 
               id='userCard' 
               data-userId="${user.userId}">
     
@@ -86,20 +89,21 @@ function userCard(user) {
     return html;
 }
 
-
-
-
 async function fetchUserData(url) {
-
     try {
         const response = await fetch(url);
-       
         try {
             const data = await response.json();
-            let userInfo = { 'userId': data.userId, 'avatar': data.avatar, 'displayName': data.displayName, 'email': data.email }      
+            let userInfo = { 'userId': data.userId, 'avatar': data.avatar, 'displayName': data.displayName, 'email': data.email, 'date':data.rData }      
             userRoot.innerHTML = userCard(userInfo);
-            fetchFeed(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
+            aboutRoot.innerHTML = about(userInfo);
+            // photosRoot.innerHTML = photos(); see fetchFeed()
+            // friendsRoot.innerHTML = friends();  see fetchFeed()
+            modalsRoot.innerHTML = modals(userInfo);
+            shareRoot.innerHTML = share(userInfo);            
+            fetchFeed(userInfo);
+
         }
         catch (parseError) {
             console.log('Failed to parse JSON: ' + parseError);

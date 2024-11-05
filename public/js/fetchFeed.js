@@ -5,7 +5,7 @@ function createPostTemplate (post, user) {
 
   let html =`
  
-      <div class="card mx-auto" style="width: 32rem;" 
+      <div class="card mx-auto"
            data-post=${post.blogId}
            id= feedPost${post.blogId} >
        
@@ -83,7 +83,7 @@ function createPostTemplate (post, user) {
 
 html += commentAdd(user);
 html += commentWrap(post);
-
+html += 
 `
     </div>
   
@@ -184,18 +184,25 @@ function commentWrap(post){
 
 const url = `https://mysite.boxcar.site/record/`;
 
-async function fetchFeed(arr) {
+async function fetchFeed(user) {
   feedRoot.innerHTML = '';
+  
     try {
         const response = await fetch(url);
 
         try {
             const data = await response.json();
+
+            // document.getElementById('friendsRoot').innerHTML = friends(user, data)
+            document.getElementById('photosRoot').innerHTML = photos(user, data);
             data.forEach(p => {
-                feedRoot.innerHTML += createPostTemplate(p, arr);
+              
+                  feedRoot.innerHTML += createPostTemplate(p, user);  
+
             });
             
             
+              
         }
         catch (parseError) {
             console.log('Failed to parse JSON: ' + parseError);
