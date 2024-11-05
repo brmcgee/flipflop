@@ -59,6 +59,7 @@ function setNavbar(user){
                 <option value="Lady G">Lady G</option>
                 <option value="Doc">Doc</option>
                 <option value="Guest">Guest</option>
+                <option value="Captain Ron">Captain Ron</option>
                 <option value="Brian M">Brian M</option>
                 <option value="Cricket">Cricket</option>
                 <option value="Brian M">Brian M</option>

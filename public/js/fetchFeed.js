@@ -5,7 +5,7 @@ function createPostTemplate (post, user) {
 
   let html =`
  
-      <div class="card mx-auto"
+      <div class="card mx-auto mb-2"
            data-post=${post.blogId}
            id= feedPost${post.blogId} >
        
