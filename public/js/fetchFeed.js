@@ -5,7 +5,7 @@ function createPostTemplate (post, user) {
 
   let html =`
  
-      <div class="card mx-auto mb-2"
+      <div class="post card mx-auto mb-2"
            data-post=${post.blogId}
            id= feedPost${post.blogId} >
        
@@ -82,14 +82,23 @@ function createPostTemplate (post, user) {
 `;
 
 
-html += commentAdd(user);
+html += commentAdd(user, post.blogId);
+
+
+// comment container holds all comment wrap 
+html += `<div data-comment='${post.blogId}' id="commentContainer${post.blogId}" class='comment-container d-flex flex-column'>`
+
+// insert comments here if comment length > 0
 
 if (post.comment.length > 0) {  
-  html += commentWrap(post);  
+  html += commentWrap(post, user);  
 }
+// end insert comments 
 
+// footer area 
 html += 
 `
+      </div>
     </div>
   
 
@@ -97,7 +106,8 @@ html +=
     <div class="card-footer border-0 pt-0">
       
       
-        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" 
+                data-bs-toggle="button" aria-pressed="true" onclick="loadAllComments(${post.blogId}, ${user.userId})">
           <div class="spinner-dots me-2">
             <span class="spinner-dot"></span>
             <span class="spinner-dot"></span>
@@ -108,11 +118,13 @@ html +=
       </div>
     
     </div>  
-  `;
+`;
   return html;
 }
 
-function commentAdd(user){
+
+
+function commentAdd(user, postId){
     
         let html =`
         <div class="comment-add d-flex mb-3">
@@ -122,13 +134,14 @@ function commentAdd(user){
            </div>
          
            <form class="position-relative w-100">
-             <textarea class="form-control pe-4 bg-light" data-autoresize rows="1" placeholder="Add a comment..."></textarea>
+             <textarea class="form-control pe-4 bg-light" data-autoresize rows="1" placeholder="Add a comment... postid${postId} userid${user.userId}"></textarea>
              
              <div class="position-absolute top-0 end-0">
                <button class="btn" type="button">🙂</button>
              </div>
  
-             <button class="btn btn-sm btn-primary mb-0 rounded mt-2" type="submit">Post</button>
+             <button data-commentAdd="${postId}" id="btnAddComment${postId} 
+                    "onclick="addComment(${postId}, ${user.userId})" class="btn btn-sm btn-primary mb-0 rounded mt-2" type="submit">Post</button>
            </form>
          </div>
          
@@ -138,20 +151,20 @@ function commentAdd(user){
 
 }
 
-function commentWrap(post){
+function commentWrap(post, user){
     let html;
-    if (post.comment.length >= 0) {
+    
     
     html = `
     
-        <ul class="comment-wrap list-unstyled">
+        <ul class="comment-wrap list-unstyled" data-userId="${user.userId}" data-postId="${post.blogId}">
           
           <li class="comment-item">
             <div class="d-flex position-relative">
               <div class="comment-line-inner"></div>
              
               <div class="avatar avatar-xs">
-                <a href="#!"><img class="avatar-img rounded-circle" src=" ${post.comment[0].avatar} " alt=""></a>
+                <a href="#!"><img class="avatar-img rounded-circle" src=" ${post.comment[0].avatar} " alt="${post.comment[0].author}"></a>
               </div>
               <div class="ms-2">
                
@@ -160,7 +173,7 @@ function commentWrap(post){
                     <h6 class="mb-1"> <a href="#!"> ${post.comment[0].author} </a></h6>
                     <small class="ms-2"> ${post.comment[0].date} </small>
                   </div>
-                  <p class="small mb-0"> ${post.comment[0].comment} </p>
+                  <p class="small mb-0"> ${post.comment[0].comment}</p>
                 </div>
                 
                 <ul class="nav nav-divider py-2 small">
@@ -181,7 +194,7 @@ function commentWrap(post){
         </ul>    
     
     `;
-    }
+    
 
     return html;
 }
@@ -216,6 +229,84 @@ async function fetchFeed(user) {
         console.log('Network request failed: ', networkError);
     }
 }
+
+function addComment(postid, userid) {
+  alert('post id ' + postid + ' userid ' + userid )
+}
+
+function commentWrapAll(postId, userId, comment) {
+  let html;    
+  
+  html = `
+    
+  <ul class="comment-wrap list-unstyled" data-userId="${userId}" data-postId="${postId}">
+    
+    <li class="comment-item">
+      <div class="d-flex position-relative">
+        <div class="comment-line-inner"></div>
+       
+        <div class="avatar avatar-xs">
+          <a href="#!"><img class="avatar-img rounded-circle" src=" ${comment.avatar} " alt="${comment.author}"></a>
+        </div>
+        <div class="ms-2">
+         
+          <div class="bg-light rounded-start-top-0 p-3 rounded">
+            <div class="d-flex justify-content-between">
+              <h6 class="mb-1"> <a href="#!"> ${comment.author} </a></h6>
+              <small class="ms-2"> ${comment.date} </small>
+            </div>
+            <p class="small mb-0"> ${comment.comment}</p>
+          </div>
+          
+          <ul class="nav nav-divider py-2 small">
+            <li class="nav-item">
+              <a class="nav-link" href="#!"> Like (3)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!"> Reply</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!"> View 5 replies</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    
+  </ul>    
+
+`;
+return html;
+}
+
+
+
+
+// write to commentContainer innerHTML
+async function loadAllComments(post, user){
+
+  let html = '';
+  let url = `https://mysite.boxcar.site/comments/${post}/`
+
+  try {
+    const response = await fetch(url);
+    try {
+        const data = await response.json();
+        data.forEach(c => {
+          
+          html += commentWrapAll(Number(post), Number(user), c)
+        })
+        
+        document.getElementById(`commentContainer${post}`).innerHTML = html;          
+    }
+    catch (parseError) {
+        console.log('Failed to parse JSON: ' + parseError);
+    }
+} catch (networkError) {
+    console.log('Network request failed: ', networkError);
+}
+};
+
 
 
 
