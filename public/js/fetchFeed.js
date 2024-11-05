@@ -81,8 +81,13 @@ function createPostTemplate (post, user) {
         
 `;
 
+
 html += commentAdd(user);
-html += commentWrap(post);
+
+if (post.comment.length > 0) {  
+  html += commentWrap(post);  
+}
+
 html += 
 `
     </div>
