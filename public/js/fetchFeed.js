@@ -30,15 +30,28 @@ function createPostTemplate (post, user) {
           </div>
           
           <div class="dropdown">
-            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" 
+               id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
             </a>
              
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+
+
+
+              <li>
+                <a id="editBtn" class="dropdown-item alert alert-info py-1" data-id="${post.blogId}" width="30px" href="#!" 
+                  data-bs-toggle="modal" data-bs-target="#editPost" onclick="editPost(${post.blogId})" > 
+                  <i class="bi bi-image-fill text-success pe-2"></i>Edit Post</a>
+              </li>
+
+
+
+
+
               <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow ${post.author} </a></li>
               <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+              <li> <a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
             </ul>

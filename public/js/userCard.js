@@ -109,6 +109,7 @@ async function fetchUserData(url) {
             // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
             modalsRoot.innerHTML += createPostModal(userInfo);
+            // modalsRoot.innerHTML += fetchEditModal(userInfo);
             shareRoot.innerHTML = share(userInfo);            
             fetchFeed(userInfo);
             // document.getElementById(`commentCount${post.blogId}`).innerHTML = '0000';
@@ -125,3 +126,6 @@ async function fetchUserData(url) {
 
 //init program start point
 fetchUserData(userUrl);
+
+
+

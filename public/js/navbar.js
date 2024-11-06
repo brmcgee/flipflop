@@ -1,38 +1,3 @@
-
-// let userListElem = document.getElementById('userList');
-// let userListUrl = `https://mysite.boxcar.site/users/`;
-
-// async function fetchUserName(){
-//   let userList = [];
-//   let html;
-//   try {
-//       const response = await fetch(userListUrl);
-//       let html;
-//       try {
-//           const data = await response.json();
-//           data.map(u => {
-//             if (!userList.includes(u.displayName.trim())) { userList.push(u.displayName.trim()) }       
-//           });
-//           for (let i=0; i< userList.length; i++){
-//             html +=  `Brian `;
-//           }
-//           return html;
-          
-//       }
-//       catch (parseError) {
-//           console.log('Failed to parse JSON: ' + parseError);
-//       }
-//     } catch (networkError) {
-//         console.log('Network request failed: ', networkError);
-//   }
-// }
-// function htmlUserSelect (item) {
-//   let html = `<option value= " ${item} "> ${item} </option> `;
-//   return html;
-// }
-
-
-
 function setNavbar(user){
   
     let html =`
