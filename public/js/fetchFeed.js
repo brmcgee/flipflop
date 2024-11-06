@@ -33,7 +33,7 @@ function createPostTemplate (post, user) {
              
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
               <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+              <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow ${post.author} </a></li>
               <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
               <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -47,7 +47,7 @@ function createPostTemplate (post, user) {
       <div class="card-body">
         <p> ${post.body} </p>
          
-        <img class="card-img" src=" ${post.img} " alt="Post">
+        <img class="card-img" src=" ${post.img} " alt="${post.title}">
         
         <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 my-3">
           <li class="nav-item">
@@ -91,7 +91,19 @@ html += `<div data-comment='${post.blogId}' id="commentContainer${post.blogId}" 
 // insert comments here if comment length > 0
 
 if (post.comment.length > 0) {  
-  html += commentWrap(post, user);  
+  // record object 
+  let rec = {
+    'postId' : post.blogId,
+    'userId' : user.userId,
+    'comment' : { 'id' : post.comment[0].id,
+                  'postId' : post.comment[0].postId,
+                  'author' : post.comment[0].author,
+                  'date' : post.comment[0].date,
+                  'avatar' : post.comment[0].avatar,
+                  'comment' : post.comment[0].comment
+                }
+  };
+  html += commentWrapAll(rec.postId, rec.userId, rec.comment);  
 }
 // end insert comments 
 
@@ -103,12 +115,13 @@ html +=
   
 
     
-    <div class="card-footer border-0 pt-0">
+    <div class="card-footer border-0 pt-0"  id="loadMore${post.blogId}">
       
       
         <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" 
-                data-bs-toggle="button" aria-pressed="true" onclick="loadAllComments(${post.blogId}, ${user.userId})">
-          <div class="spinner-dots me-2">
+                id="commentMenu${post.blogId}" data-bs-toggle="button" aria-pressed="true" 
+                onclick="loadAllComments(${post.blogId}, ${user.userId})">
+          <div class="spinner-dots me-2" >
             <span class="spinner-dot"></span>
             <span class="spinner-dot"></span>
             <span class="spinner-dot"></span>
@@ -122,12 +135,10 @@ html +=
   return html;
 }
 
-
-
 function commentAdd(user, postId){
     
         let html =`
-        <div class="comment-add d-flex mb-3">
+        <div id="commentAddContainer${postId}" class="comment-add d-flex mb-3">
            
            <div class="avatar avatar-xs me-2">
              <a href="#!"> <img class="avatar-img rounded-circle" src=" ${user.avatar} " alt=""> </a>
@@ -151,57 +162,55 @@ function commentAdd(user, postId){
 
 }
 
-function commentWrap(post, user){
-    let html;
+// function commentWrap(post, user){
+//     let html;
     
     
-    html = `
+//     html = `
     
-        <ul class="comment-wrap list-unstyled" data-userId="${user.userId}" data-postId="${post.blogId}">
+//         <ul class="comment-wrap list-unstyled" data-userId="${user.userId}" data-postId="${post.blogId}">
           
-          <li class="comment-item">
-            <div class="d-flex position-relative">
-              <div class="comment-line-inner"></div>
+//           <li class="comment-item">
+//             <div class="d-flex position-relative">
+//               <div class="comment-line-inner"></div>
              
-              <div class="avatar avatar-xs">
-                <a href="#!"><img class="avatar-img rounded-circle" src=" ${post.comment[0].avatar} " alt="${post.comment[0].author}"></a>
-              </div>
-              <div class="ms-2">
+//               <div class="avatar avatar-xs">
+//                 <a href="#!"><img class="avatar-img rounded-circle" src=" ${post.comment[0].avatar} " alt="${post.comment[0].author}"></a>
+//               </div>
+//               <div class="ms-2">
                
-                <div class="bg-light rounded-start-top-0 p-3 rounded">
-                  <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"> <a href="#!"> ${post.comment[0].author} </a></h6>
-                    <small class="ms-2"> ${post.comment[0].date} </small>
-                  </div>
-                  <p class="small mb-0"> ${post.comment[0].comment}</p>
-                </div>
+//                 <div class="bg-light rounded-start-top-0 p-3 rounded">
+//                   <div class="d-flex justify-content-between">
+//                     <h6 class="mb-1"> <a href="#!"> ${post.comment[0].author} </a></h6>
+//                     <small class="ms-2"> ${post.comment[0].date} </small>
+//                   </div>
+//                   <p class="small mb-0"> ${post.comment[0].comment}</p>
+//                 </div>
                 
-                <ul class="nav nav-divider py-2 small">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#!"> Like (3)</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#!"> Reply</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#!"> View 5 replies</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
+//                 <ul class="nav nav-divider py-2 small">
+//                   <li class="nav-item">
+//                     <a class="nav-link" href="#!"> Like (3)</a>
+//                   </li>
+//                   <li class="nav-item">
+//                     <a class="nav-link" href="#!"> Reply</a>
+//                   </li>
+//                   <li class="nav-item">
+//                     <a class="nav-link" href="#!"> View 5 replies</a>
+//                   </li>
+//                 </ul>
+//               </div>
+//             </div>
+//           </li>
           
-        </ul>    
+//         </ul>    
     
-    `;
+//     `;
     
 
-    return html;
-}
-
+//     return html;
+// }
 
 const url = `https://mysite.boxcar.site/record/`;
-
 async function fetchFeed(user) {
   feedRoot.innerHTML = '';
   
@@ -277,27 +286,51 @@ function commentWrapAll(postId, userId, comment) {
 
 `;
 return html;
+};
+
+function handleClickCommentContainer(postId) {
+  let container = document.getElementById(`commentContainer${postId}`);
+  container.innerHTML = '';
 }
-
-
-
 
 // write to commentContainer innerHTML
 async function loadAllComments(post, user){
 
   let html = '';
   let url = `https://mysite.boxcar.site/comments/${post}/`
-
+document.getElementById(`loadMore${post}`).innerHTML = ''
   try {
     const response = await fetch(url);
     try {
         const data = await response.json();
         data.forEach(c => {
-          
-          html += commentWrapAll(Number(post), Number(user), c)
-        })
         
-        document.getElementById(`commentContainer${post}`).innerHTML = html;          
+          html += commentWrapAll(Number(post), Number(user), c);
+          
+        })
+        document.getElementById(`loadMore${post}`).innerHTML +=
+           `<div class="card-footer border-0 pt-0 d-flex align-items-baseline"  id="loadMore${post.blogId}">
+      
+            <div class="col-1 col-sm-1 ">
+                <span class="alert alert-dark text-dark p-1 px-2 m-0 text-center" width="30px" onclick="handleClickCommentContainer(${post})">
+                  <i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+              </div>
+              <a href="#!" role="button" class="col-sm-5 col-2 btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" 
+                  id="commentMenu${post}" data-bs-toggle="button" aria-pressed="true" 
+                  onclick="loadAllComments(${post}, ${user})">
+                 <div class="spinner-dots me-2" >
+                    <span class="spinner-dot"></span>
+                    <span class="spinner-dot"></span>
+                    <span class="spinner-dot"></span>
+                   </div>
+                Load more comments 
+              </a>
+        
+              
+              <div class="col-9"></div>
+          </div>`;
+        document.getElementById(`commentContainer${post}`).innerHTML = html;
+       
     }
     catch (parseError) {
         console.log('Failed to parse JSON: ' + parseError);

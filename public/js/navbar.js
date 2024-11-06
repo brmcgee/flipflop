@@ -62,7 +62,8 @@ function setNavbar(user){
                 <option value="Captain Ron">Captain Ron</option>
                 <option value="Brian M">Brian M</option>
                 <option value="Cricket">Cricket</option>
-                <option value="Brian M">Brian M</option>
+                <option value="Juice">Juice</option>
+                <option value="Marge">Marge</option>
                 <option value="Snoop D">Snoop D</option>
                 <option value="Hootie">Hootie</option>
                 <option value="Trump">Trump</option>
@@ -74,6 +75,8 @@ function setNavbar(user){
                 <option value="News">News</option>
                 <option value="Jinko">Jinko</option>
                 <option value="Casper">Casper</option>
+                <option value="Lucy L">Lucy L</option>
+                <option value="Big Al">Big AL</option>
                 <option value="Doc">Doc</option>
                 <option value="Gecko">Gecko</option>
                 <option value="News">News</option>
