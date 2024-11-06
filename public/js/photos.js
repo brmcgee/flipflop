@@ -55,24 +55,7 @@ function photos(user, posts){
 
 
  html += `
-          
-            <div class="col-4 d-none">
-              <a href="assets/images/albums/03.jpg" data-gallery="image-popup" data-glightbox="">
-                <img class="rounded img-fluid" src="public/assets/images/intc.jpg" alt="">
-              </a>
-            </div>
-           
-            <div class="d-none">
-              <a href="assets/images/albums/04.jpg" data-gallery="image-popup" data-glightbox="">
-                <img class="rounded img-fluid" src="public/assets/images/gold.jpg" alt="">
-              </a>
-            </div>
-          
-            <div class="d-none">
-              <a href="assets/images/albums/05.jpg" data-gallery="image-popup" data-glightbox="">
-                <img class="rounded img-fluid" src="public/assets/images/fortnite.jpg" alt="">
-              </a>
-         
+                   
             </div>
           </div>
         </div>

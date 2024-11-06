@@ -244,7 +244,7 @@ function modals(user) {
     <div class="modal-content">
       
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabelCreateAlbum">Create event</h5>
+        <h5 class="modal-title" id="modalLabelCreateAlbum">Create post ${user.displayName}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     
@@ -287,7 +287,7 @@ function modals(user) {
     
                 <div class="col-12">
                     <label for="authId" hidden>Auth ID</label>
-                    <input type="text" name="authId" value="${user.userId}" class="form-control bg-light  my-1 text-center" >
+                    <input type="text" hidden name="authId" value="${user.userId}" class="form-control bg-light  my-1 text-center" >
                 </div>
                 <div class="col-12">
                     <label for="date" >Date</label>
@@ -297,7 +297,7 @@ function modals(user) {
             
     
             <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
-            <button type="submit" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+            <button type="submit" data-dismiss="modal" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
           </form>
         
       </div>

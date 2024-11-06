@@ -25,13 +25,9 @@ function userCard(user) {
     let html = 
     `
 
-  <div class="user-card card mx-auto" style="" 
-              id='userCard' 
-              data-userId="${user.userId}">
+  <div class="user-card card mx-auto" style="" id='userCard' data-userId="${user.userId}">
     
-    <div class="h-200px rounded-top" id="bgHero"
-                style="background-image:url(${user.hero});
-                background-position: center; background-size: cover; background-repeat: no-repeat;">
+    <div class="h-200px rounded-top" id="bgHero" style="background-image:url(${user.hero}); background-position: center; background-size: cover; background-repeat: no-repeat;">
     </div>
       
     <div class="card-body py-0">

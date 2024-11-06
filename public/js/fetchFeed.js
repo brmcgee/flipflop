@@ -1,8 +1,12 @@
 const feedRoot = document.getElementById('feedRoot');  
 
 
+let comments = [];
 function createPostTemplate (post, user) {
-
+  // set comment array for length 
+  comments = [];
+  comments = post.comment;
+ 
   let html =`
  
       <div class="post card mx-auto mb-2"
@@ -56,7 +60,7 @@ function createPostTemplate (post, user) {
           </li>
           <li class="nav-item">
             <a class="nav-link mb-0" href="#!">
-            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( ${post.comment.length} )</a>
+            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( ${comments.length} )</a>
           </li>
           
           <li class="nav-item dropdown">
@@ -80,8 +84,8 @@ function createPostTemplate (post, user) {
         </ul>
         
 `;
-
-
+// reset comment counter 
+comments = [];
 html += commentAdd(user, post.blogId);
 
 
