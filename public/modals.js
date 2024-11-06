@@ -1,4 +1,87 @@
+
+
+function createPostModal(user) {
+
+    return    `
+    <!-- Create Post Modal -->
+    <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="addPost" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header  alert alert-dark">
+            <h5 class="modal-title" id="addPost">Welcome ${user.displayName}! Create new post</h5>
+            <button type="button" class="close border-0 bg-transparent " data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+        <div class="container-fluid mt-2 border px-2 py-1 bg-white" style="max-width:620px;">
+          <form action="/add-post" method="get" class="form-group border-0">
+            <div class="row">
+    
+                <div class="col-12">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
+                </div>
+                <div class="col-12">
+                    <label for="category">Category</label>
+                    <input type="text" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
+                </div>
+                <div class="col-12">
+                    <label for="body">Post Content</label>
+                    <textarea  type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
+                </div>
+    
+                <div class="form-group p-1 row">
+                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                      <label for="text">URL for image</label>
+                      <input type="text" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
+                    </div>
+                </div>
+    
+                <div class="col-12">
+                    <label for="author" hidden>Author</label>
+                    <input type="text" name="author" hidden value="${user.displayName}"  class="form-control bg-light text-center"> 
+                </div>
+                <div class="form-group p-1 row">
+                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                        <label for="text" hidden>URL for avatar</label>
+                        <input type="text" value="${user.avatar}" hidden name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar">
+                    </div>
+                </div>
+    
+    
+                <div class="col-12">
+                    <label for="authId" hidden>Auth ID</label>
+                    <input type="text" name="authId" value="${user.userId}" class="form-control bg-light  my-1 text-center" >
+                </div>
+                <div class="col-12">
+                    <label for="date" >Date</label>
+                    <input type="date"  name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
+                </div>
+            </div> 
+            
+    
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
+            <button type="submit" value="Submit" class="btn btn-primary "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+          </form>
+        </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+    
+        `;
+    
+}
+
+
+
 function modals(user) {
+
+  let addUrl = `https://mysite.boxcar.site/add-post`;
+  // addUrl = `http://127.0.0.1:5000/add-post`;
+
  return `
  <div class="feed modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="modalLabelCreateFeed" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -167,90 +250,58 @@ function modals(user) {
     
       <div class="modal-body">
         
-        <form class="row g-4">
-        
-          <div class="col-12">
-            <label class="form-label">Title</label>
-            <input type="email" class="form-control" placeholder="Event name here">
-          </div>
-         
-          <div class="col-12">
-            <label class="form-label">Description</label>
-            <textarea class="form-control" rows="2" placeholder="Ex: topics, schedule, etc."></textarea>
-          </div>
-         
-          <div class="col-sm-4">
-            <label class="form-label">Date</label>
-            <input type="text" class="form-control flatpickr" placeholder="Select date">
-          </div>
-          
-          <div class="col-sm-4">
-            <label class="form-label">Time</label>
-            <input type="text" class="form-control flatpickr" data-enableTime="true" data-noCalendar="true" placeholder="Select time">
-          </div>
-          
-          <div class="col-sm-4">
-            <label class="form-label">Duration</label>
-            <input type="email" class="form-control" placeholder="1hr 23m">
-          </div>
-          
-          <div class="col-12">
-            <label class="form-label">Location</label>
-            <input type="email" class="form-control" placeholder="Logansport, IN 46947">
-          </div>
-          
-          <div class="col-12">
-            <label class="form-label">Add guests</label>
-            <input type="email" class="form-control" placeholder="Guest email">
-          </div>
-          
-          <div class="col-12 mt-3">
-            <ul class="avatar-group list-unstyled align-items-center mb-0">
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
-              </li>
-              <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
-              </li>
-              <li class="ms-3">
-                <small> +50 </small>
-              </li>
-            </ul>
-          </div>
-         
-          <div>
-            <label class="form-label">Upload attachment</label>
-            <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-              <div class="dz-message">
-                <i class="bi bi-file-earmark-text display-3"></i>
-                <p>Drop presentation and document here or click to upload.</p>
-              </div>
-            </div>
-          </div>
-        
-        </form>
+                 <form action="${addUrl}" method="get" class="form-group border-0">
+            <div class="row">
+    
+                <div class="col-12">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
+                </div>
+                <div class="col-12">
+                    <label for="category">Category</label>
+                    <input type="text" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
+                </div>
+                <div class="col-12">
+                    <label for="body">Post Content</label>
+                    <textarea  type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
+                </div>
+    
+                <div class="form-group p-1 row">
+                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                      <label for="text">URL for image</label>
+                      <input type="text" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
+                    </div>
+                </div>
+    
+                <div class="col-12">
+                    <label for="author" hidden>Author</label>
+                    <input type="text" name="author" hidden value="${user.displayName}"  class="form-control bg-light text-center"> 
+                </div>
+                <div class="form-group p-1 row">
+                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
+                        <label for="text" hidden>URL for avatar</label>
+                        <input type="text" value="${user.avatar}" hidden name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar">
+                    </div>
+                </div>
+    
+    
+                <div class="col-12">
+                    <label for="authId" hidden>Auth ID</label>
+                    <input type="text" name="authId" value="${user.userId}" class="form-control bg-light  my-1 text-center" >
+                </div>
+                <div class="col-12">
+                    <label for="date" >Date</label>
+                    <input type="date"  name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
+                </div>
+            </div> 
+            
+    
+            <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
+            <button type="submit" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+          </form>
         
       </div>
-     
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal"> Cancel</button>
-        <button type="button" class="btn btn-success-soft">Create now</button>
-      </div>
+
     </div>
   </div>
 </div>

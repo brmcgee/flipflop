@@ -47,7 +47,7 @@ function setNavbar(user){
 
 			
 			<a class="navbar-brand d-none d-sm-block" href="index.html">
-				<img class=" light-mode-item navbar-brand-item text-light small" src=" ${randomBg(bg)} " alt=" ${user.displayName}">
+				<img class=" light-mode-item navbar-brand-item text-light small" src=" ${user.hero} " alt=" ${user.displayName}">
 			</a>
 		
 
@@ -107,9 +107,10 @@ function setNavbar(user){
            
             <li><a class="dropdown-item" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings & Privacy</a></li>
             <li> 
-              <a class="dropdown-item" href="https://mysite.boxcar.site/" target="_blank">
-                <i class="fa fa-phone-square" aria-hidden="true"></i> Support
-              </a> 
+              <button type="button" class="btn-sm  ms-2 btn btn-outline-light float-end my-2 my-sm-0" data-toggle="modal" data-target="#addPost">
+                Create Post
+              </button>
+               
             </li>
             <li> 
               <a class="dropdown-item" href="https://mysite.boxcar.site/admin" target="_blank">

@@ -9,7 +9,7 @@ function about(user){
         </div>
 
         <div class="card-body position-relative pt-0">
-          <p></p>
+          <p> ${user.feeling} </p>
 
           <ul class="list-unstyled mt-3 mb-0">
             <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> User ID: <strong> ${user.userId} </strong> </li>

@@ -135,6 +135,7 @@ html +=
   return html;
 }
 
+// component 
 function commentAdd(user, postId){
     
         let html =`
@@ -145,21 +146,22 @@ function commentAdd(user, postId){
            </div>
          
            <form class="position-relative w-100">
-             <textarea class="form-control pe-4 bg-light" data-autoresize rows="1" placeholder="Add a comment... postid${postId} userid${user.userId}"></textarea>
+             <textarea id= "addCommentTA${postId}" class="form-control pe-4 bg-light" data-autoresize rows="1" placeholder="Add a comment..."></textarea>
+             <input hidden id="userAvatar${user.userId}" value="${user.avatar}">
+             <input hidden id="userDisplay${user.userId}" value="${user.displayName}">
              
              <div class="position-absolute top-0 end-0">
                <button class="btn" type="button">🙂</button>
              </div>
  
-             <button data-commentAdd="${postId}" id="btnAddComment${postId} 
-                    "onclick="addComment(${postId}, ${user.userId})" class="btn btn-sm btn-primary mb-0 rounded mt-2" type="submit">Post</button>
+             <button id="btnAddComment${postId}" type="button"
+                    onclick="handleAddComment(${postId}, ${user.userId})" class="btn btn-sm btn-primary mb-0 rounded mt-2" >Post</button>
            </form>
          </div>
          
      `;
      return html;
     
-
 }
 
 // function commentWrap(post, user){
@@ -239,10 +241,32 @@ async function fetchFeed(user) {
     }
 }
 
-function addComment(postid, userid) {
-  alert('post id ' + postid + ' userid ' + userid )
-}
 
+function handleAddComment(postid, userid) {
+  // console.log(postid, userid)
+    let urlapi = `https://mysite.boxcar.site/post-comment`;
+    let user = userid;
+    let display = document.getElementById(`userDisplay${userid}`).value;
+    let avatar = document.getElementById(`userAvatar${userid}`).value;
+    let comment = document.getElementById(`addCommentTA${postid}`).value;
+    let post = postid;
+      if (comment == '') { alert('Please enter comment'); return null}
+    
+    let com = {'user': user, 'author': display, 'avatar': avatar, 'comment': comment, 'post': post, 'date': 'just now ..'}
+    let params = `display=${com.author}&&user=${com.user}&&comment=${com.comment}&&avatar=${com.avatar}&&post=${com.post}`;
+       
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById(`addCommentTA${postid}`).value = '';  
+          document.getElementById(`commentContainer${postid}`).innerHTML += commentWrapAll(postid, userid, com)
+        }
+      };
+      
+      xmlhttp.open("POST", urlapi, true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xmlhttp.send(params);
+}
 function commentWrapAll(postId, userId, comment) {
   let html;    
   
@@ -287,50 +311,45 @@ function commentWrapAll(postId, userId, comment) {
 `;
 return html;
 };
-
 function handleClickCommentContainer(postId) {
   let container = document.getElementById(`commentContainer${postId}`);
   container.innerHTML = '';
 }
-
 // write to commentContainer innerHTML
 async function loadAllComments(post, user){
 
   let html = '';
-  let url = `https://mysite.boxcar.site/comments/${post}/`
-document.getElementById(`loadMore${post}`).innerHTML = ''
+  let url = `https://mysite.boxcar.site/comments/${post}/`;
+
   try {
     const response = await fetch(url);
     try {
         const data = await response.json();
         data.forEach(c => {
-        
           html += commentWrapAll(Number(post), Number(user), c);
-          
         })
-        document.getElementById(`loadMore${post}`).innerHTML +=
-           `<div class="card-footer border-0 pt-0 d-flex align-items-baseline"  id="loadMore${post.blogId}">
+        // document.getElementById(`loadMore${post}`).innerHTML +=
+        //    `<div class="card-footer border-0 pt-0 d-flex align-items-baseline"  id="loadMore${post.blogId}">
       
-            <div class="col-1 col-sm-1 ">
-                <span class="alert alert-dark text-dark p-1 px-2 m-0 text-center" width="30px" onclick="handleClickCommentContainer(${post})">
-                  <i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-              </div>
-              <a href="#!" role="button" class="col-sm-5 col-2 btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" 
-                  id="commentMenu${post}" data-bs-toggle="button" aria-pressed="true" 
-                  onclick="loadAllComments(${post}, ${user})">
-                 <div class="spinner-dots me-2" >
-                    <span class="spinner-dot"></span>
-                    <span class="spinner-dot"></span>
-                    <span class="spinner-dot"></span>
-                   </div>
-                Load more comments 
-              </a>
+        //     <div class="col-1 col-sm-1 ">
+        //         <span class="alert alert-dark text-dark p-1 px-2 m-0 text-center" width="30px" onclick="handleClickCommentContainer(${post})">
+        //           <i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+        //       </div>
+        //       <a href="#!" role="button" class="col-sm-5 col-2 btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" 
+        //           id="commentMenu${post}" data-bs-toggle="button" aria-pressed="true" 
+        //           onclick="loadAllComments(${post}, ${user})">
+        //          <div class="spinner-dots me-2" >
+        //             <span class="spinner-dot"></span>
+        //             <span class="spinner-dot"></span>
+        //             <span class="spinner-dot"></span>
+        //            </div>
+        //         Load more comments 
+        //       </a>
         
               
-              <div class="col-9"></div>
-          </div>`;
-        document.getElementById(`commentContainer${post}`).innerHTML = html;
-       
+        //       <div class="col-9"></div>
+        //   </div>`;
+        document.getElementById(`commentContainer${post}`).innerHTML = html;   
     }
     catch (parseError) {
         console.log('Failed to parse JSON: ' + parseError);

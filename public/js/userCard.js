@@ -1,6 +1,7 @@
 let userRoot = document.getElementById('userRoot');
 let userQuery = "Guest"
 let userUrl = `https://mysite.boxcar.site/users/${userQuery}`;
+
 const navbarRoot = document.getElementById('navbarRoot');
 const friendsRoot = document.getElementById('friendsRoot')
 const photosRoot = document.getElementById('photosRoot');
@@ -13,6 +14,7 @@ const bg = [`public/assets/bg/fighter.jpg`, `public/assets/bg/lowrider-orange.jp
 
 function setUserId(val){
     let url = `https://mysite.boxcar.site/users/${val}`;
+
     fetchUserData(url); 
 }
 function randomBg(b){
@@ -22,12 +24,13 @@ function randomBg(b){
 function userCard(user) {
     let html = 
     `
+
   <div class="user-card card mx-auto" style="" 
               id='userCard' 
               data-userId="${user.userId}">
     
     <div class="h-200px rounded-top" id="bgHero"
-                style="background-image:url(${randomBg(bg)});
+                style="background-image:url(${user.hero});
                 background-position: center; background-size: cover; background-repeat: no-repeat;">
     </div>
       
@@ -70,7 +73,7 @@ function userCard(user) {
         <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
           <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
           <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
-          <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on Nov 26, 2019</li>
+          <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on ${user.date}</li>
         </ul>
       </div>
       
@@ -94,13 +97,22 @@ async function fetchUserData(url) {
         const response = await fetch(url);
         try {
             const data = await response.json();
-            let userInfo = { 'userId': data.userId, 'avatar': data.avatar, 'displayName': data.displayName, 'email': data.email, 'date':data.rData }      
+            let userInfo = {  'userId': data.userId, 
+                              'avatar': data.avatar, 
+                              'displayName': data.displayName, 
+                              'email': data.email, 
+                              'hero': data.hero,
+                              'feeling' : data.feeling,
+                              'date': data.date                 
+                             }   
+        console.log(userInfo)   
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
             // photosRoot.innerHTML = photos(); see fetchFeed()
             // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
+            modalsRoot.innerHTML += createPostModal(userInfo);
             shareRoot.innerHTML = share(userInfo);            
             fetchFeed(userInfo);
 
