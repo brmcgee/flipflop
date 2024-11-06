@@ -208,8 +208,10 @@ html += `
                         <input type="number" hidden id="post" name="post" value="" class="form-control bg-light  my-1 text-center" >
                     </div>
                 </div> 
-          <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
-        <button type="submit" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+          
+                <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
+        
+          <button type="submit" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
       </form>
     </div>
       

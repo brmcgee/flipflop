@@ -40,9 +40,9 @@ function createPostTemplate (post, user) {
 
 
               <li>
-                <a id="editBtn" class="dropdown-item alert alert-info py-1" data-id="${post.blogId}" width="30px" href="#!" 
-                  data-bs-toggle="modal" data-bs-target="#editPost" onclick="editPost(${post.blogId})" > 
-                  <i class="bi bi-image-fill text-success pe-2"></i>Edit Post</a>
+                <a id="editBtn" class="dropdown-item" data-id="${post.blogId}" href="#!" 
+                                data-bs-toggle="modal" data-bs-target="#editPost" onclick="editPost(${post.blogId})" > 
+                  <i class="fa fa-file pe-2" aria-hidden="true"></i>Edit Post</a>
               </li>
 
 
@@ -289,6 +289,14 @@ function handleAddComment(postid, userid) {
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById(`addCommentTA${postid}`).value = '';  
           document.getElementById(`commentContainer${postid}`).innerHTML += commentWrapAll(postid, userid, com)
+          
+          root.innerHTML += `
+          <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
+              <i class="fa fa-check pe-2" aria-hidden="true"></i>
+              <strong>${com.author}</strong> You have successfully added comment -- ${com.comment}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        `
         }
       };
       
