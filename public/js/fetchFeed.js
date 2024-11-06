@@ -1,14 +1,13 @@
 const feedRoot = document.getElementById('feedRoot');  
 
 
-let comments = [];
+
 function createPostTemplate (post, user) {
   // set comment array for length 
-  comments = [];
-  comments = post.comment;
- 
+  
+
   let html =`
- 
+
       <div class="post card mx-auto mb-2"
            data-post=${post.blogId}
            id= feedPost${post.blogId} >
@@ -60,7 +59,7 @@ function createPostTemplate (post, user) {
           </li>
           <li class="nav-item">
             <a class="nav-link mb-0" href="#!">
-            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( ${comments.length} )</a>
+            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( <span id="text-primary">${post.commentCount()}</span> )</a>
           </li>
           
           <li class="nav-item dropdown">
@@ -84,8 +83,7 @@ function createPostTemplate (post, user) {
         </ul>
         
 `;
-// reset comment counter 
-comments = [];
+
 html += commentAdd(user, post.blogId);
 
 
@@ -228,10 +226,24 @@ async function fetchFeed(user) {
 
             // document.getElementById('friendsRoot').innerHTML = friends(user, data)
             document.getElementById('photosRoot').innerHTML = photos(user, data);
-            data.forEach(p => {
-              
-                  feedRoot.innerHTML += createPostTemplate(p, user);  
 
+            data.forEach(p => {
+              let post = {
+                            'blogId' : p.blogId,
+                            'author' : p.author,
+                            'title' : p.title,
+                            'body' : p.body,
+                            'category' : p.category,
+                            'img' : p.img,
+                            'rDate' : p.regDate,
+                            'authorId' : p.authorId,
+                            'authorAvatar' : p.authorAvatar,
+                            'comment' : p.comment,
+                            'commentCount' : function () { return this.comment.length}
+              }
+                  
+             
+              feedRoot.innerHTML += createPostTemplate(post, user);  
             });
             
             

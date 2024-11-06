@@ -101,7 +101,7 @@ async function fetchUserData(url) {
                               'feeling' : data.feeling,
                               'date': data.date                 
                              }   
-        console.log(userInfo)   
+        
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
@@ -111,6 +111,7 @@ async function fetchUserData(url) {
             modalsRoot.innerHTML += createPostModal(userInfo);
             shareRoot.innerHTML = share(userInfo);            
             fetchFeed(userInfo);
+            // document.getElementById(`commentCount${post.blogId}`).innerHTML = '0000';
 
         }
         catch (parseError) {

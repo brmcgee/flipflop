@@ -6,6 +6,8 @@ function photos(user, posts){
   posts.forEach(p => {
    if (p.authorId == user.userId) { userImage.push(p.img)}
   });
+  userImage.push(user.avatar);
+  userImage.push(user.hero);
 
     let html = `
         <div class="photos">
