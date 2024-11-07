@@ -241,7 +241,7 @@ html += `
                     
                     <input type="text" id="aCategory" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
 
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png" 
+                    <img src="public/assets/placeholder/placeholder.jpg" 
                         id="imgModal" class="img-fluid ms-3 rounded rounded-2" width="200px"  alt="${user.displayName}, Invalid URL">
 
                 </div>
@@ -298,6 +298,144 @@ html += `
 </div>
 `;
 
+
+
+
+
 return html;
 }
 
+
+
+function seePhotosModal () {
+
+  let html =`
+  
+  <div class="feed modal fade" id="photoModal" tabindex="-1" aria-labelledby="modalphotoModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+   
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalphotoModal">Create post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body" id="photoModal">
+    
+         <div class="d-flex mb-3">
+
+            <div class="avatar avatar-xs me-2">
+              <img class="avatar-img rounded-circle" src="${user.avatar}" alt="">
+            </div>
+      
+            <form class="w-100">
+              <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" placeholder="Share your thoughts..." autofocus></textarea>
+            </form>
+          </div>
+
+        <div class="hstack gap-2">
+          <a class="icon-md bg-success bg-opacity-10 text-success rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Photo"><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
+          <a class="icon-md bg-info bg-opacity-10 text-info rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Video"> <i class="fa fa-video-camera" aria-hidden="true"></i></a>
+          <a class="icon-md bg-danger bg-opacity-10 text-danger rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"> <i class="fa fa-calendar" aria-hidden="true"></i> </a>
+          <a class="icon-md bg-warning bg-opacity-10 text-warning rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Feeling/Activity"> <i class="fa fa-meh-o" aria-hidden="true"></i> </a>
+          <a class="icon-md bg-light text-secondary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Check in"> <i class="bi bi-geo-alt-fill"></i> </a>
+          <a class="icon-md bg-primary bg-opacity-10 text-primary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag people on top"> <i class="bi bi-tag-fill"></i> </a>
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer row justify-content-between">
+    
+        <div class="col-lg-3">
+          <select class="form-select js-choice" data-position="top" data-search-enabled="false">
+            <option value="PB">Public</option>
+            <option value="PV">Friends</option>
+            <option value="PV">Only me</option>
+            <option value="PV">Custom</option>
+          </select>
+        </div>
+      
+        <div class="col-lg-8 text-sm-end">
+          <button type="button" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
+          <button type="button" class="btn btn-success-soft">Post</button>
+        </div>
+      </div>
+  
+
+    </div>
+  </div>
+</div>
+  
+  
+  `
+}
+
+
+function photoModal(images, user){
+// photoModal   See all photos modal 
+let html =`
+  
+<div class="feed modal fade" id="photoModal" tabindex="-1" aria-labelledby="modalphotoModal" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+ 
+    <div class="modal-header">
+      <div class="d-flex justify-content-center align-items-center">
+      
+        <i class="fa fa-camera pe-3 display-5" aria-hidden="true"></i>
+        <h5 class="modal-title">Photo Gallery ${user.displayName}</h5>
+
+      </div>
+
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body" id="photoModal">
+        <div class="modal-title">
+        </div>
+
+        
+`
+
+images.forEach(i => {
+   html += ` <div class="d-flex flex-wrap justify-content-center"> 
+                <img src="${i}" alt="" class="img-fluid m-1 rounded rounded shadow" width="300px"  srcset="">
+             </div>`;
+});
+
+html += `
+        
+
+
+    </div>
+
+
+    <div class="modal-footer row justify-content-between">
+  
+      <div class="col-lg-3">
+        <select class="form-select js-choice" data-position="top" data-search-enabled="false">
+          <option value="PB">Public</option>
+          <option value="PV">Friends</option>
+          <option value="PV">Only me</option>
+          <option value="PV">Custom</option>
+        </select>
+      </div>
+    
+      <div class="col-lg-8 text-sm-end">
+              <button type="button" class="btn btn-danger-soft" data-bs-dismiss="modal" aria-label="Close">Close</button>
+              <button type="button" class="disabled btn btn-success-soft">Share</button>
+      </div>
+      
+    </div>
+
+
+  </div>
+</div>
+</div>
+
+
+`
+return html;
+}

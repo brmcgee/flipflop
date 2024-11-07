@@ -1,4 +1,4 @@
-
+// add photoModal to modal root at end  
 
 function photos(user, posts){
   let userImage = [];
@@ -9,13 +9,14 @@ function photos(user, posts){
   userImage.push(user.avatar);
   userImage.push(user.hero);
 
+   
     let html = `
         <div class="photos">
       <div class="card">
       
         <div class="card-header d-sm-flex justify-content-between border-0">
           <h5 class="card-title">Photos <span class="badge bg-success bg-opacity-10 text-success small"> ${userImage.length} </span></h5>
-          <a class="btn btn-primary-soft btn-sm" href="#!"> See all photo</a>
+          <a class="btn btn-primary-soft btn-sm" href="#!" data-bs-toggle="modal" data-bs-target="#photoModal" type="button"> See all photo</a>
         </div>
 
         <div class="card-body position-relative pt-0">
@@ -24,7 +25,7 @@ function photos(user, posts){
 
  `;
 
-
+    
 
 
     let stopAtTwo = 0;
@@ -64,6 +65,9 @@ function photos(user, posts){
   
       </div>
     </div>`;
+
+
+    modalsRoot.innerHTML += photoModal(userImage, user);
     return html;
 
 }

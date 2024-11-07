@@ -8,6 +8,7 @@ const photosRoot = document.getElementById('photosRoot');
 const aboutRoot = document.getElementById('aboutRoot');
 const modalsRoot = document.getElementById('modalsRoot');
 const shareRoot = document.getElementById('shareRoot');
+const root = document.getElementById('root');
 const bg = [`public/assets/bg/fighter.jpg`, `public/assets/bg/lowrider-orange.jpg`, `public/assets/bg/lowrider.jpg`, `public/assets/bg/beach.jpg`, `public/assets/bg/blue-tech.jpg`, `public/assets/bg/waterfall.jpg`, `women-ai.jpg` ];
 
 
@@ -100,19 +101,18 @@ async function fetchUserData(url) {
                               'hero': data.hero,
                               'feeling' : data.feeling,
                               'date': data.date                 
-                             }   
-        
+                             }
+            // initilize views                     
+            root.innerHTML = welcome('success', userInfo, 'logged in');                  
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
-            // photosRoot.innerHTML = photos(); see fetchFeed()
-            // friendsRoot.innerHTML = friends();  see fetchFeed()
+              // photosRoot.innerHTML = photos(); see fetchFeed()
+              // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
             modalsRoot.innerHTML += createPostModal(userInfo);
-            // modalsRoot.innerHTML += fetchEditModal(userInfo);
             shareRoot.innerHTML = share(userInfo);            
             fetchFeed(userInfo);
-            // document.getElementById(`commentCount${post.blogId}`).innerHTML = '0000';
 
         }
         catch (parseError) {
@@ -128,4 +128,12 @@ async function fetchUserData(url) {
 fetchUserData(userUrl);
 
 
-
+function welcome(type, user, action){
+  return `
+              <div class="alert alert-${type} alert-dismissible fade show mb-0" role="alert">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                    <strong>${user.displayName}</strong> You have successfully ${action}!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+  `
+}
