@@ -6,9 +6,7 @@ function createPostTemplate (post, user) {
 
   let html =`
 
-      <div class="post card mx-auto mb-2"
-           data-post=${post.blogId}
-           id= feedPost${post.blogId} >
+      <div class="post card mx-auto mb-2" data-post=${post.blogId} id= feedPost${post.blogId} >
        
       <div class="card-header border-0 pb-0">
         <div class="d-flex align-items-center justify-content-between">
