@@ -1,7 +1,5 @@
 const feedRoot = document.getElementById('feedRoot');  
 
-
-
 function createPostTemplate (post, user) {
   // set comment array for length 
   
@@ -253,14 +251,9 @@ async function fetchFeed(user) {
                             'authorAvatar' : p.authorAvatar,
                             'comment' : p.comment,
                             'commentCount' : function () { return this.comment.length}
-              }
-                  
-             
+              }                       
               feedRoot.innerHTML += createPostTemplate(post, user);  
-            });
-            
-            
-              
+            });                         
         }
         catch (parseError) {
             console.log('Failed to parse JSON: ' + parseError);

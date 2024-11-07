@@ -79,9 +79,6 @@ function createPostModal(user) {
 
 function modals(user) {
 
-  let addUrl = `https://mysite.boxcar.site/add-post`;
-  // addUrl = `http://127.0.0.1:5000/add-post`;
-
 // modalCreateFeed
 let html = `
  <div class="feed modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="modalLabelCreateFeed" aria-hidden="true">
@@ -274,10 +271,11 @@ html += `
 </div>
 
 `
-// create post modal 
+// create post modal modalAddPost
+let addUrl = `https://mysite.boxcar.site/add-post`;
 html += `
 
-<div class="create-event modal fade" id="modalCreateEvents" tabindex="-1" aria-labelledby="modalLabelCreateAlbum" aria-hidden="true">
+<div class="add-post modal fade" id="modalAddPost" tabindex="-1" aria-labelledby="modalLabelCreateAlbum" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       
@@ -293,21 +291,21 @@ html += `
     
                 <div class="col-12">
                     <label for="title">Title</label>
-                    <input type="text" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
+                    <input type="text" id="aTitle" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
                 </div>
                 <div class="col-12">
                     <label for="category">Category</label>
-                    <input type="text" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
+                    <input type="text" id="aCategory" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
                 </div>
                 <div class="col-12">
                     <label for="body">Post Content</label>
-                    <textarea  type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
+                    <textarea id="aBody" type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
                 </div>
     
                 <div class="form-group p-1 row">
                     <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
                       <label for="text">URL for image</label>
-                      <input type="text" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
+                      <input type="text" id="aImg" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
                     </div>
                 </div>
     
@@ -329,13 +327,13 @@ html += `
                 </div>
                 <div class="col-12">
                     <label for="date" >Date</label>
-                    <input type="date"  name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
+                    <input type="date" id="aDate" name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
                 </div>
             </div> 
             
     
-            <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
-            <button type="submit" data-dismiss="modal" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+            <button type="button"  data-bs-dismiss="modal" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
+            <button type="button" onclick="handleAddPost('${user.displayName}')" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
           </form>
         
       </div>
