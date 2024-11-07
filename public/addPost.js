@@ -34,7 +34,10 @@ async function addPost(user) {
     let category = document.getElementById('aCategory').value;
     let img = document.getElementById('aImg').value;
 
+    let post = { 'title' : title, 'body' : body, 'category': category, 'img': img, 'author': user.displayName, 'authorAvatar' : user.avatar, 'comment': '[]', 'commentCount' : function () { return this.comment.length} }
+    // post.comment = {'user': user.userId, 'author': user.displayName, 'avatar': user.avatar, 'comment': 'Start adding comments now..', 'post': null, 'date': 'just now ..'}
 
+    
     let params = `author=${user.displayName}&&authId=${user.userId}&&body=${body}&&category=${category}&&title=${title}&&fileToUpload=${img}&&avatar=${user.avatar}&&date=''`;
     
     var xmlhttp = new XMLHttpRequest();
@@ -47,14 +50,10 @@ async function addPost(user) {
             const myModal = document.getElementById('modalAddPost'); 
             const modal = bootstrap.Modal.getInstance(myModal); 
             modal.hide(); 
+            document.getElementById('newPostRoot').innerHTML += createPostTemplate (post, user)
 
-            root.innerHTML += `
-                <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
-                    <i class="fa fa-check pe-2" aria-hidden="true"></i>
-                    <strong>${user.displayName}</strong> You have successfully added post -- ${title}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `
+            alertStatus(user.displayName, title.slice(0, 7) + '.....', 'success', 'added');
+            
         }
       };
       

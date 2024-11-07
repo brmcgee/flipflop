@@ -177,54 +177,6 @@ function commentAdd(user, postId){
     
 }
 
-// function commentWrap(post, user){
-//     let html;
-    
-    
-//     html = `
-    
-//         <ul class="comment-wrap list-unstyled" data-userId="${user.userId}" data-postId="${post.blogId}">
-          
-//           <li class="comment-item">
-//             <div class="d-flex position-relative">
-//               <div class="comment-line-inner"></div>
-             
-//               <div class="avatar avatar-xs">
-//                 <a href="#!"><img class="avatar-img rounded-circle" src=" ${post.comment[0].avatar} " alt="${post.comment[0].author}"></a>
-//               </div>
-//               <div class="ms-2">
-               
-//                 <div class="bg-light rounded-start-top-0 p-3 rounded">
-//                   <div class="d-flex justify-content-between">
-//                     <h6 class="mb-1"> <a href="#!"> ${post.comment[0].author} </a></h6>
-//                     <small class="ms-2"> ${post.comment[0].date} </small>
-//                   </div>
-//                   <p class="small mb-0"> ${post.comment[0].comment}</p>
-//                 </div>
-                
-//                 <ul class="nav nav-divider py-2 small">
-//                   <li class="nav-item">
-//                     <a class="nav-link" href="#!"> Like (3)</a>
-//                   </li>
-//                   <li class="nav-item">
-//                     <a class="nav-link" href="#!"> Reply</a>
-//                   </li>
-//                   <li class="nav-item">
-//                     <a class="nav-link" href="#!"> View 5 replies</a>
-//                   </li>
-//                 </ul>
-//               </div>
-//             </div>
-//           </li>
-          
-//         </ul>    
-    
-//     `;
-    
-
-//     return html;
-// }
-
 const url = `https://mysite.boxcar.site/record/`;
 async function fetchFeed(user) {
   feedRoot.innerHTML = '';
@@ -235,7 +187,7 @@ async function fetchFeed(user) {
         try {
             const data = await response.json();
 
-            // document.getElementById('friendsRoot').innerHTML = friends(user, data)
+            document.getElementById('newPostRoot').innerHTML = '';
             document.getElementById('photosRoot').innerHTML = photos(user, data);
 
             data.forEach(p => {
@@ -283,13 +235,8 @@ function handleAddComment(postid, userid) {
           document.getElementById(`addCommentTA${postid}`).value = '';  
           document.getElementById(`commentContainer${postid}`).innerHTML += commentWrapAll(postid, userid, com)
           
-          root.innerHTML += `
-          <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
-              <i class="fa fa-check pe-2" aria-hidden="true"></i>
-              <strong>${com.author}</strong> You have successfully added comment -- ${com.comment}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        `
+          alertStatus(display, com.comment.slice(0, 12) + '.....', 'success', 'commented');
+
         }
       };
       

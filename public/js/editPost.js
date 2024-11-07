@@ -47,13 +47,8 @@ async function handleEditPost(postid) {
             const myModal = document.getElementById('editPost'); 
             const modal = bootstrap.Modal.getInstance(myModal); 
             modal.hide(); 
-            root.innerHTML += `
-                <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
-                    <i class="fa fa-check pe-2" aria-hidden="true"></i>
-                    <strong>${author}</strong> You have successfully updated post -- ${title}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `
+
+            alertStatus(author, title.slice(0, 8) + '.....', 'success', 'updated');
         }
       };
       
@@ -62,7 +57,6 @@ async function handleEditPost(postid) {
       xmlhttp.send(params);
     
 }
-
 
 
 
