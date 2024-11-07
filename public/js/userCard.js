@@ -18,6 +18,30 @@ function setUserId(val){
 
     fetchUserData(url); 
 }
+function convertDate(date){
+
+  let y =  date.slice(0,4);
+  let d = date.slice(5, 7);
+  
+  let m = date.slice(8, 10);
+  let h = date.slice(11, 13) - 12;
+  let min = date.slice (14, 16);
+  let ap = 'AM'
+  let hour;
+
+  
+  if (Number(h) > 12) {
+      hour = h ; 
+   } else { 
+      hour =Number(h) - 5; 
+      ap = 'PM';
+   }
+
+  date = `${d}-${m}-${y}  <span class="ps-2">${hour}:${min}${ap}</span>`;
+  return date;
+
+}
+
 function randomBg(b){
     let num = Math.floor(Math.random() * b.length - 1 );
     return bg[num];
@@ -49,7 +73,9 @@ function userCard(user) {
           
           <div class="d-flex mt-3 justify-content-center ms-sm-auto">
             
-          <button class="btn btn-danger-soft me-2 btn-sm" type="button"> <i class="fa fa-address-card" aria-hidden="true"></i></button>
+            <button class="btn btn-danger-soft me-2 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalEditUserInfo">
+             <i class="fa fa-address-card" aria-hidden="true"></i>
+             </button>
             <div class="dropdown">
               
               <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,16 +96,16 @@ function userCard(user) {
         <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
           <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
           <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
-          <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on ${user.date}</li>
+          <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on ${convertDate(user.date)}</li>
         </ul>
       </div>
       
       <div class="card-footer mt-3 pt-2 pb-0">
         
         <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
-          <li class="nav-item"> <a class="nav-link active" href="my-profile.html"> Posts </a> </li>
-          <li class="nav-item"> <a class="nav-link" href="my-profile-about.html"> About </a> </li>
-          <li class="nav-item"> <a class="nav-link" href="my-profile-connections.html"> Connections <span class="badge bg-success bg-opacity-10 text-success small"> 230</span> </a> </li>
+          <li class="nav-item"> <a class="nav-link active" href="#!"> Posts </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#!"> About </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#!"> Connections <span class="badge bg-success bg-opacity-10 text-success small">${user.userId}</span> </a> </li>
 
         </ul>
       </div>
@@ -112,6 +138,7 @@ async function fetchUserData(url) {
               // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
             modalsRoot.innerHTML += createPostModal(userInfo);
+            modalsRoot.innerHTML += editUserInfo(userInfo);
             shareRoot.innerHTML = share(userInfo);            
             fetchFeed(userInfo);
 

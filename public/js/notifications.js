@@ -9,3 +9,4 @@ function alertStatus(author, title, type, action){
         root.innerHTML += html;
         return;
 }
+

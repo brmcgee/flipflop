@@ -307,25 +307,24 @@ return html;
 
 
 
-function seePhotosModal () {
-
+function editUserInfo(userInfo) {
   let html =`
   
-  <div class="feed modal fade" id="photoModal" tabindex="-1" aria-labelledby="modalphotoModal" aria-hidden="true">
+  <div class="feed modal fade" id="modalEditUserInfo" tabindex="-1" aria-labelledby="modalphotoModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
    
       <div class="modal-header">
-        <h5 class="modal-title" id="modalphotoModal">Create post</h5>
+        <h5 class="modal-title" id="modalEditUserInfo">Edit User info</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body" id="photoModal">
+      <div class="modal-body" id="infoModal">
     
          <div class="d-flex mb-3">
 
             <div class="avatar avatar-xs me-2">
-              <img class="avatar-img rounded-circle" src="${user.avatar}" alt="">
+              <img class="avatar-img rounded-circle" src="${userInfo.avatar}" alt="">
             </div>
       
             <form class="w-100">
@@ -333,14 +332,7 @@ function seePhotosModal () {
             </form>
           </div>
 
-        <div class="hstack gap-2">
-          <a class="icon-md bg-success bg-opacity-10 text-success rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Photo"><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
-          <a class="icon-md bg-info bg-opacity-10 text-info rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Video"> <i class="fa fa-video-camera" aria-hidden="true"></i></a>
-          <a class="icon-md bg-danger bg-opacity-10 text-danger rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"> <i class="fa fa-calendar" aria-hidden="true"></i> </a>
-          <a class="icon-md bg-warning bg-opacity-10 text-warning rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Feeling/Activity"> <i class="fa fa-meh-o" aria-hidden="true"></i> </a>
-          <a class="icon-md bg-light text-secondary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Check in"> <i class="bi bi-geo-alt-fill"></i> </a>
-          <a class="icon-md bg-primary bg-opacity-10 text-primary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag people on top"> <i class="bi bi-tag-fill"></i> </a>
-        </div>
+
 
       </div>
 
@@ -358,8 +350,8 @@ function seePhotosModal () {
         </div>
       
         <div class="col-lg-8 text-sm-end">
-          <button type="button" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-          <button type="button" class="btn btn-success-soft">Post</button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Close</button>
+          <button type="button" class="btn btn-success-soft">Submit</button>
         </div>
       </div>
   
@@ -369,7 +361,8 @@ function seePhotosModal () {
 </div>
   
   
-  `
+  `;
+  return html;
 }
 
 
@@ -439,3 +432,4 @@ html += `
 `
 return html;
 }
+
