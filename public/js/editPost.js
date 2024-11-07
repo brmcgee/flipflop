@@ -43,12 +43,12 @@ async function handleEditPost(postid) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          console.log('Updated post ' + postid + '!')
+   
             const myModal = document.getElementById('editPost'); 
             const modal = bootstrap.Modal.getInstance(myModal); 
             modal.hide(); 
 
-            alertStatus(author, title.slice(0, 8) + '.....', 'success', 'updated');
+            alertStatus(author, title, 'success', 'updated');
         }
       };
       
@@ -59,51 +59,50 @@ async function handleEditPost(postid) {
 }
 
 
-
-
-
-
-
-
-
 // modal body html 
 function modalBodyHtml(post) {
+    t = post.title.trim();
+    i = post.img.trim();
+    b = post.body.trim();
     let html = `
       
     <div class="container-fluid mt-2 border px-2 py-1 bg-white" style="max-width:620px;">
          <form action="http://mysite.boxcar.site/update-post-data" method="POST" class="form-group border-0">
            <div class="row">
-           
+               
                <div class="col-12">
                    <label for="title">Title</label>
-                   <input type="text" id="eTitle" name="title" value="${post.title}" class="form-control bg-light  my-1 text-center" required> 
+                   <textarea type="text" id="eTitle" rows="4" name="title"class="form-control bg-light  my-1" required>${t}</textarea>
                </div>
-               <div class="col-12">
-                   <label for="category">Category</label>
-                   <input type="text" id="eCategory" name="category" value="${post.category}"  class="form-control bg-light text-center" required> 
+
+               <label for="category">Category</label>
+               <div class="col-12 d-flex justify-content-between">
+                   
+                    <input type="text" id="eCategory" name="category" value="${post.category}"  class=" me-2 form-control bg-light" required> 
+                    <img src="${i}" id="imgE" class="img-fluid ms-1 rounded rounded-2" width="200px p-1" alt="${post.author}, invalid URL.">
+
                </div>
                <div class="col-12">
                    <label for="body">Post Content</label>
-                   <textarea  type="text" id="eBody" name="body" class="form-control bg-light  my-1 text-center" rows="10" required>
-                    ${post.body}
-                   </textarea>
+                   <textarea  type="text" id="eBody" name="body" class="form-control bg-light  my-1" rows="11" required>${b}</textarea>
                </div>
 
                <div class="form-group p-1 row">
                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
                      <label for="text">URL for image</label>
-                     <input type="text" id="eImg" name="fileToUpload" id="fileToUpload" value="${post.img}" class="form-control bg-light text-center my-1" required >
+                        <input type="text" id="eImg" rows="7" value="${i}" name="fileToUpload" onchange="document.getElementById('imgE').src = this.value"
+                        id="fileToUpload" class="form-control bg-light  my-1" required" ></input>
                    </div>
                </div>
 
                <div class="col-12">
-                   <label for="author" >Author</label>
-                   <input type="text" id="eAuthor" name="author" value="${post.author}"  class="form-control bg-light text-center"> 
+                   <label for="author" hidden >Author</label>
+                   <input type="text" hidden id="eAuthor" name="author" value="${post.author}"  class="form-control bg-light text-center"> 
                </div>
                <div class="form-group p-1 row">
                    <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
-                       <label for="text" >URL for avatar</label>
-                       <input type="text" id="eAvatar" value="${post.authorAvatar}"  name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar">
+                       <label for="text" hidden >URL for avatar</label>
+                       <input type="text" hidden id="eAvatar" value="${post.authorAvatar}" name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar">
                    </div>
                </div>
 

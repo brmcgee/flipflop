@@ -27,6 +27,6 @@ function alertStatus(author, title, type, action){
 //         $(`closeToast${idName}`).on('click', function () {
 //             $(`#toast${idName}`).hide;
 //         })
-        document.getElementById('notifications').innerHTML += html;
+        document.getElementById('root').innerHTML += html;
         return;
 }

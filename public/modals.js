@@ -145,76 +145,18 @@ html += `
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     
-      <div class="modal-header">
-        <h5 class="modal-title" id="feedActionPhotoLabel">Edit Post</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="feedActionPhotoLabel">Edit Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
 
         <div class="modal-body" id="editBody">
-     
-        
-      
-              <div class="container-fluid mt-2 border px-2 py-1 bg-white" style="max-width:620px;">
-              <form action="/update-post-data" method="POST" class="form-group border-0">
-                <div class="row">
-                
-                    <div class="col-12">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" value="" class="form-control bg-light  my-1 text-center" required> 
-                    </div>
-                    <div class="col-12">
-                        <label for="category">Category</label>
-                        <input type="text" name="category" value=""  class="form-control bg-light text-center" required> 
-                    </div>
-                    <div class="col-12">
-                        <label for="body">Post Content</label>
-                        <textarea  type="text" name="body" class="form-control bg-light  my-1 text-center" rows="10" required>
-                        
-                        </textarea>
-                    </div>
 
-                    <div class="form-group p-1 row">
-                        <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
-                          <label for="text">URL for image</label>
-                          <input type="text" name="fileToUpload" id="fileToUpload" value="" class="form-control bg-light text-center my-1" required >
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="author" >Author</label>
-                        <input type="text" name="author"  value=""  class="form-control bg-light text-center"> 
-                    </div>
-                    <div class="form-group p-1 row">
-                        <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
-                            <label for="text" >URL for avatar</label>
-                            <input type="text" value=""  name="avatar" class="form-control bg-light my-1 text-center" placeholder="author avatar">
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="authId" hidden >Auth ID</label>
-                        <input type="text" hidden name="authId" value="" class="form-control bg-light  my-1 text-center" >
-                    </div>
-                    <div class="col-6">
-                        <label for="date" hidden>Date</label>
-                        <input type="text"  hidden name="date" value="" class="form-control bg-light  my-1 text-center">
-                    </div>
-
-                    <div class="col-6">
-                        <label for="postId" hidden>Post Id</label>
-                        <input type="number" hidden id="post" name="post" value="" class="form-control bg-light  my-1 text-center" >
-                    </div>
-                </div> 
-          
-                <button type="button" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
-        
-          <button type="submit" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
-      </form>
-    </div>
-      
-
-
-
+          <div class="alert alert-danger">  
+            <h5>Unable to fetch post data</h5>
+          </div>
+            
+   
         </div>
     </div>
   </div>
@@ -271,7 +213,7 @@ html += `
 </div>
 
 `
-// create post modal modalAddPost
+// create post modal modalAddPost   ADD POST
 let addUrl = `https://mysite.boxcar.site/add-post`;
 html += `
 
@@ -291,12 +233,21 @@ html += `
     
                 <div class="col-12">
                     <label for="title">Title</label>
-                    <input type="text" id="aTitle" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required> 
+                    <textarea type="text" id="aTitle" row="5" name="title" placeholder="blog post title" class="form-control bg-light  my-1 text-center" required></textarea>
                 </div>
-                <div class="col-12">
-                    <label for="category">Category</label>
+
+                <label for="category">Category</label>
+                <div class="col-12 d-flex justify-content-between">
+                    
                     <input type="text" id="aCategory" name="category" placeholder="category"  class="form-control bg-light text-center" required> 
+
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png" 
+                        id="imgModal" class="img-fluid ms-3 rounded rounded-2" width="200px"  alt="${user.displayName}, Invalid URL">
+
                 </div>
+
+
+
                 <div class="col-12">
                     <label for="body">Post Content</label>
                     <textarea id="aBody" type="text" name="body" placeholder="blog post content" class="form-control bg-light  my-1 text-center" rows="4" required></textarea>
@@ -305,7 +256,8 @@ html += `
                 <div class="form-group p-1 row">
                     <div class="col-sm-12 col-md-12 mt-1 d-flex flex-column ms-2">
                       <label for="text">URL for image</label>
-                      <input type="text" id="aImg" name="fileToUpload" id="fileToUpload" placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
+                      <input type="text" id="aImg" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('imgModal').src = this.value"
+                          placeholder="blog post URL" class="form-control bg-light  my-1 text-center" required>
                     </div>
                 </div>
     
@@ -326,15 +278,18 @@ html += `
                     <input type="text" hidden name="authId" value="${user.userId}" class="form-control bg-light  my-1 text-center" >
                 </div>
                 <div class="col-12">
-                    <label for="date" >Date</label>
-                    <input type="date" id="aDate" name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
+                    <label for="date" hidden>Date</label>
+                    <input type="date" id="aDate" hidden name="date" placeholder="date" value="${user.date}" class="form-control bg-light  my-1 text-center">
                 </div>
             </div> 
             
-    
-            <button type="button"  data-bs-dismiss="modal" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
-            <button type="button" onclick="handleAddPost('${user.displayName}')" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
-          </form>
+            <div class="modal-footer">
+              <button type="button"  data-bs-dismiss="modal" class="btn btn-danger-soft me-2" data-dismiss="modal"><i class="fa fa-window-close px-2" aria-hidden="true"></i>Close</button>
+              <button type="button" onclick="handleAddPost('${user.displayName}')" value="Submit" class="btn btn-success-soft "><i class="fa fa-plus-circle px-2" aria-hidden="true"></i>Submit</button>
+            </div>
+            
+            </form>
+
         
       </div>
 

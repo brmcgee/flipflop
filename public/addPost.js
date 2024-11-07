@@ -1,6 +1,6 @@
 let addUrl = `https://mysite.boxcar.site/add-post`;
 
-
+// form in modals 
 
 function handleAddPost(author){
     getUserInfo(author);
@@ -52,7 +52,7 @@ async function addPost(user) {
             modal.hide(); 
             document.getElementById('newPostRoot').innerHTML += createPostTemplate (post, user)
 
-            alertStatus(user.displayName, title.slice(0, 7) + '.....', 'success', 'added');
+            alertStatus(user.displayName, title, 'success', 'added');
             
         }
       };

@@ -35,23 +35,25 @@ function createPostTemplate (post, user) {
              
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
 
-
-
               <li>
-                <a id="editBtn" class="dropdown-item" data-id="${post.blogId}" href="#!" 
-                                data-bs-toggle="modal" data-bs-target="#editPost" onclick="editPost(${post.blogId})" > 
-                  <i class="fa fa-file pe-2" aria-hidden="true"></i>Edit Post</a>
+                <a id="editBtn" class="dropdown-item" data-id="${post.blogId}" href="#!" data-bs-toggle="modal" data-bs-target="#editPost" onclick="editPost(${post.blogId})" > 
+                  <i class="fa fa-file pe-2" aria-hidden="true"></i>
+                    Edit Post</a>
               </li>
 
+              <li><a class="disabled dropdown-item" href="#"> <i class="fa fa-times pe-2" aria-hidden="true"></i>
+                Unfollow ${post.author} </a></li>
 
+              <li><a class="disabled dropdown-item" href="#"> <i class="fa fa-ban pe-2" aria-hidden="true"></i></i>
+                Hide post</a></li>
 
+              <li> <a class="disabled dropdown-item" href="#"> <i class="fa fa-bookmark pe-2" aria-hidden="true"></i></i>
+                Save post</a></li>
 
-
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow ${post.author} </a></li>
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-              <li> <a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+              
+              <li><a class="disabled dropdown-item" href="#"> <i class="fa fa-exclamation-triangle pe-2" aria-hidden="true"></i>
+                Report post</a></li>
             </ul>
           </div>
            
@@ -65,17 +67,17 @@ function createPostTemplate (post, user) {
         
         <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 my-3">
           <li class="nav-item">
-            <a class="nav-link mb-0 active" href="#!">
-             <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked (56)</a>
+            <a class="disabled nav-link mb-0" href="#!">
+             <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked ()</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link mb-0" href="#!">
-            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( <span id="text-primary">${post.commentCount()}</span> )</a>
+          <li class=" nav-item">
+            <a class="disabled nav-link mb-0 " href="#!">
+            <i class="fa fa-comment" aria-hidden="true"></i> Comments ( <span class="" id="commentCount${post.blogId}">${post.commentCount()}</span> )</a>
           </li>
           
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link mb-0" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-share" aria-hidden="true"></i> Share (3)
+            <a href="#" class="disabled nav-link mb-0" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-share" aria-hidden="true"></i> Share ()
             </a>
                
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -89,7 +91,7 @@ function createPostTemplate (post, user) {
           </li>
            
           <li class="nav-item">
-            <a class="nav-link mb-0" href="#!"> <i class="fa fa-paper-plane" aria-hidden="true"></i> Send</a>
+            <a class="disabled nav-link mb-0" href="#!"> <i class="fa fa-paper-plane" aria-hidden="true"></i> Send</a>
           </li>
         </ul>
         
@@ -126,7 +128,6 @@ html +=
       </div>
     </div>
   
-
     
     <div class="card-footer border-0 pt-0"  id="loadMore${post.blogId}">
       
@@ -145,7 +146,9 @@ html +=
     
     </div>  
 `;
+
   return html;
+
 }
 
 // component 
@@ -235,8 +238,9 @@ function handleAddComment(postid, userid) {
           document.getElementById(`addCommentTA${postid}`).value = '';  
           document.getElementById(`commentContainer${postid}`).innerHTML += commentWrapAll(postid, userid, com)
           
-          alertStatus(display, com.comment.slice(0, 12) + '.....', 'success', 'commented');
-
+          alertStatus(display, com.comment, 'info', 'commented');
+          document.getElementById(`commentCount${postid}`).innerHTML = Number(document.getElementById(`commentCount${postid}`).innerHTML) + 1;
+          
         }
       };
       
