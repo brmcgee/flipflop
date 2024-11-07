@@ -103,11 +103,12 @@ async function fetchUserData(url) {
                               'date': data.date                 
                              }
             // initilize views                     
-            root.innerHTML = welcome('success', userInfo, 'logged in');                  
+            root.innerHTML = welcome('info', userInfo, 'logged in');                  
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
               // photosRoot.innerHTML = photos(); see fetchFeed()
+              // modalsRoot.innerHTML += photoModal(userImage); see photos.js 
               // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
             modalsRoot.innerHTML += createPostModal(userInfo);
@@ -131,7 +132,7 @@ fetchUserData(userUrl);
 function welcome(type, user, action){
   return `
               <div class="alert alert-${type} alert-dismissible fade show mb-0" role="alert">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user pe-2" aria-hidden="true"></i>
                     <strong>${user.displayName}</strong> You have successfully ${action}!
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

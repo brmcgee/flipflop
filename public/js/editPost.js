@@ -39,7 +39,9 @@ async function handleEditPost(postid) {
     let date = document.getElementById('eDate').value;
 
     let params = `post=${postId}&&author=${author}&&authId=${authId}&&body=${body}&&category=${category}&&title=${title}&&fileToUpload=${img}&&avatar=${avatar}&&date=${date}`;
-    
+    let post = {'author' : author, 'rDate': date, 'title': title, 'img': img, "body": body, 'authorAvatar': avatar, 'blogId' : postId, 'comment' : [], 'commentCount' : function () { return this.comment.length}}
+    let user = {'displayName' : author, 'avatar' : avatar};
+
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -49,6 +51,9 @@ async function handleEditPost(postid) {
             modal.hide(); 
 
             alertStatus(author, title, 'success', 'updated');
+
+            // reset individual post in dom 
+            document.getElementById(`feedPost${postId}`).innerHTML = createPostTemplate (post, user)
         }
       };
       

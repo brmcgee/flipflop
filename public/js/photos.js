@@ -4,7 +4,7 @@ function photos(user, posts){
   let userImage = [];
 
   posts.forEach(p => {
-   if (p.authorId == user.userId) { userImage.push(p.img)}
+   if (p.authorId == user.userId) { userImage.push(p.img || "public/assets/placeholder/unavailable-image.jpg")}
   });
   userImage.push(user.avatar);
   userImage.push(user.hero);
@@ -32,8 +32,8 @@ function photos(user, posts){
     for(let i=0; i<userImage.length; i++){
           html += `         
             <div class="col-6">
-              <a href="assets/images/albums/01.jpg" data-gallery="image-popup" data-glightbox="">
-                <img class="rounded img-fluid" src=" ${userImage[i]} " alt="img">
+              <a href="${userImage[i]}" data-gallery="image-popup" data-glightbox="">
+                <img class="rounded img-fluid" src=" ${userImage[i]} " alt="img" height="200px;">
               </a>
             </div>           
         `;
@@ -46,7 +46,7 @@ function photos(user, posts){
         for (let i = 2; i < userImage.length; i++) {
           html += `
               <div class="col-4">
-                <a href="assets/images/albums/03.jpg" data-gallery="image-popup" data-glightbox="">
+                <a href="${userImage[i]}" data-gallery="image-popup" data-glightbox="">
                   <img class="rounded img-fluid" src=" ${userImage[i]} " alt="">
                 </a>
               </div>

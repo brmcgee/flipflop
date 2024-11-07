@@ -152,8 +152,8 @@ html += `
 
         <div class="modal-body" id="editBody">
 
-          <div class="alert alert-danger">  
-            <h5>Unable to fetch post data</h5>
+          <div class="alert alert-info">  
+            <h5>fetching post content....</h5>
           </div>
             
    

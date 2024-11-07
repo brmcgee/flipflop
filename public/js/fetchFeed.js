@@ -1,8 +1,33 @@
 const feedRoot = document.getElementById('feedRoot');  
 
-function createPostTemplate (post, user) {
-  // set comment array for length 
+function convertDate(date){
+
+  let y =  date.slice(0,4);
+  let d = date.slice(5, 7);
   
+  let m = date.slice(8, 10);
+  let h = date.slice(11, 13) - 12;
+  let min = date.slice (14, 16);
+  let ap = 'AM'
+  let hour;
+
+  
+  if (Number(h) > 12) {
+      hour = h ; 
+   } else { 
+      hour =Number(h) - 5; 
+      ap = 'PM';
+   }
+
+  date = `${d}-${m}-${y}  <span class="ps-2">${hour}:${min}${ap}</span>`;
+  return date;
+
+}
+
+function createPostTemplate (post, user) {
+  
+  // set comment array for length 
+
 
   let html =`
 
@@ -11,15 +36,19 @@ function createPostTemplate (post, user) {
       <div class="card-header border-0 pb-0">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
-             
-            <div class="avatar avatar-story me-2">
-              <a href="#!"> <img class="avatar-img rounded-circle" src=" ${post.authorAvatar} " alt=" ${post.title} "> </a>
+
+  `;
+
+  (post.authorId == user.userId) ? html += `<div class="avatar avatar-story me-2">` :   html += `<div class="avatar avatar- me-2">`
+    
+  html += `
+          <a href="#!"> <img class="avatar-img rounded-circle" src=" ${post.authorAvatar} " alt=" ${post.title} "> </a>
             </div>
              
             <div>
               <div class="nav nav-divider">
                 <h6 class="nav-item card-title mb-0"> <a href="#!"> ${post.author} </a></h6>
-                <span class="nav-item small"> 2hr</span>
+                <span class="nav-item small"> ${convertDate(post.rDate)}</span>
               </div>
               <p class="mb-0 small"> ${post.title} </p>
             </div>
@@ -61,7 +90,7 @@ function createPostTemplate (post, user) {
       <div class="card-body">
         <p> ${post.body} </p>
          
-        <img class="card-img" src=" ${post.img} " alt="${post.title}">
+        <img class="card-img" src=" ${post.img || "public/assets/placeholder/unavailable-image.jpg"} " alt="${post.title}">
         
         <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 my-3">
           <li class="nav-item">
@@ -199,7 +228,7 @@ async function fetchFeed(user) {
                             'body' : p.body,
                             'category' : p.category,
                             'img' : p.img,
-                            'rDate' : p.regDate,
+                            'rDate' : p.rDate,
                             'authorId' : p.authorId,
                             'authorAvatar' : p.authorAvatar,
                             'comment' : p.comment,
