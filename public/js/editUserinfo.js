@@ -53,6 +53,10 @@ async function handleEditUser(user) {
             // `;  
 
             alertStatus(user.username, '', 'danger', `Posted to Server -- Server response of ${this.status}`)
+
+            const myModal = document.getElementById('modalEditUserInfo'); 
+            const modal = bootstrap.Modal.getInstance(myModal); 
+            modal.hide(); 
         }
       };
       
