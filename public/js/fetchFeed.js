@@ -1,33 +1,30 @@
 const feedRoot = document.getElementById('feedRoot');  
 
-function convertDate(date){
+// async function getFreshUserDetails(user, post) {
+//   let url = `https://mysite.boxcar.site/users/${user}`;
+//   console.log(url)
+//   try {
+//     const response = await fetch(url);
 
-  let y =  date.slice(0,4);
-  let d = date.slice(5, 7);
-  
-  let m = date.slice(8, 10);
-  let h = date.slice(11, 13) - 12;
-  let min = date.slice (14, 16);
-  let ap = 'AM'
-  let hour;
+//     try {
+//         const data = await response.json();
+//         createPostTemplate(post, user)                      
+//     }
+//     catch (parseError) {
+//         console.log('Failed to parse JSON: ' + parseError);
+//     }
+// } catch (networkError) {
+//     console.log('Network request failed: ', networkError);
+// }
 
-  
-  if (Number(h) > 12) {
-      hour = h ; 
-   } else { 
-      hour =Number(h) - 5; 
-      ap = 'PM';
-   }
+// return;
 
-  date = `${d}-${m}-${y}  <span class="ps-2">${hour}:${min}${ap}</span>`;
-  return date;
+// }
 
-}
-
-function createPostTemplate (post, user) {
+function createPostTemplate(post, user) {
   
   // set comment array for length 
-
+  // getFreshUserDetails(user.displayName, post);
 
   let html =`
 
@@ -233,7 +230,8 @@ async function fetchFeed(user) {
                             'authorAvatar' : p.authorAvatar,
                             'comment' : p.comment,
                             'commentCount' : function () { return this.comment.length}
-              }                       
+              }
+                                     
               feedRoot.innerHTML += createPostTemplate(post, user);  
             });                         
         }
