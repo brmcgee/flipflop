@@ -52,7 +52,7 @@ async function handleEditUser(user) {
             //     </div>
             // `;  
 
-            alertStatus(user.username, '', 'danger', `Posted to Server -- Server response of ${this.status}`)
+            alertStatus(user.username, '', 'danger', `Posted to Server -- Server response of ${this.responseText}`)
 
             const myModal = document.getElementById('modalEditUserInfo'); 
             const modal = bootstrap.Modal.getInstance(myModal); 
