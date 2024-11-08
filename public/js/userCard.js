@@ -129,8 +129,12 @@ async function fetchUserData(url) {
                               'date': data.date,
                               'password' : data.user_password                 
                              }
-            // initilize views                     
-            root.innerHTML = welcome('info', userInfo, 'logged in');                  
+            // initilize views  
+                              
+            root.innerHTML = welcome('info', userInfo, 'logged in');
+            root.style.opacity = 1;  
+            setTimeout(() => { root.innerHTML = '' }, 1500)  
+                           
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
@@ -141,9 +145,9 @@ async function fetchUserData(url) {
             modalsRoot.innerHTML += createPostModal(userInfo);
             modalsRoot.innerHTML += editUserInfo(userInfo);
             shareRoot.innerHTML = share(userInfo);   
-            getUserList(userInfo)         
-            fetchFeed(userInfo);
-            
+            getUserList(userInfo)       
+            fetchFeed(userInfo, 0, 30);   // fetchFeed(user, startIndex, stopIndex)
+                              //overide stop point @ 13 on fetchFeed
 
         }
         catch (parseError) {

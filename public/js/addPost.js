@@ -3,6 +3,9 @@ let addUrl = `https://mysite.boxcar.site/add-post`;
 // form in modals 
 
 function handleAddPost(author){
+   if ( document.getElementById('aTitle').value  == "" ||
+   document.getElementById('aBody').value  == "" || 
+    document.getElementById('aImg') == "" ) { alert('Enter details'); return;}
     getUserInfo(author);
 }
 
@@ -37,7 +40,6 @@ async function addPost(user) {
     let post = { 'title' : title, 'body' : body, 'category': category, 'img': img, 'author': user.displayName, 'authorAvatar' : user.avatar, 'comment': '[]', 'commentCount' : function () { return this.comment.length} }
     // post.comment = {'user': user.userId, 'author': user.displayName, 'avatar': user.avatar, 'comment': 'Start adding comments now..', 'post': null, 'date': 'just now ..'}
 
-    
     let params = `author=${user.displayName}&&authId=${user.userId}&&body=${body}&&category=${category}&&title=${title}&&fileToUpload=${img}&&avatar=${user.avatar}&&date=''`;
     
     var xmlhttp = new XMLHttpRequest();

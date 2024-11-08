@@ -184,7 +184,7 @@ function commentAdd(user, postId){
 }
 
 const url = `https://mysite.boxcar.site/record/`;
-async function fetchFeed(user) {
+async function fetchFeed(user, startIndex, stopIndex) {
   feedRoot.innerHTML = '';
   
     try {
@@ -192,27 +192,32 @@ async function fetchFeed(user) {
 
         try {
             const data = await response.json();
-
+            let count = 0;
             document.getElementById('newPostRoot').innerHTML = '';
             document.getElementById('photosRoot').innerHTML = photos(user, data);
 
-            data.forEach(p => {
+
+            //start and stop point for posts
+            // stopIndex=data.length
+
+            for (let i = startIndex; i < stopIndex; i++) {
+              let p = data[i];
               let post = {
-                            'blogId' : p.blogId,
-                            'author' : p.author,
-                            'title' : p.title,
-                            'body' : p.body,
-                            'category' : p.category,
-                            'img' : p.img,
-                            'rDate' : p.rDate,
-                            'authorId' : p.authorId,
-                            'authorAvatar' : p.authorAvatar,
-                            'comment' : p.comment,
-                            'commentCount' : function () { return this.comment.length}
+                'blogId' : p.blogId,
+                'author' : p.author,
+                'title' : p.title,
+                'body' : p.body,
+                'category' : p.category,
+                'img' : p.img,
+                'rDate' : p.rDate,
+                'authorId' : p.authorId,
+                'authorAvatar' : p.authorAvatar,
+                'comment' : p.comment,
+                'commentCount' : function () { return this.comment.length}
               }
-                                     
-              feedRoot.innerHTML += createPostTemplate(post, user);  
-            });                         
+              feedRoot.innerHTML += createPostTemplate(post, user);
+            }
+                     
         }
         catch (parseError) {
             console.log('Failed to parse JSON: ' + parseError);

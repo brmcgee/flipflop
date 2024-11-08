@@ -334,7 +334,7 @@ function editUserInfo(userInfo) {
           <div class="col-12 d-flex flex-no-wrap align-items-center">
       
             <label for="editDisplayName">Name</label>
-            <input type="text" name="editAvatar" value="${userInfo.displayName}" class="me-2 ms-2 form-control bg-light my-1"></input> 
+            <input type="text" id="eUsername" name="editAvatar" value="${userInfo.displayName}" class="me-2 ms-2 form-control bg-light my-1"></input> 
 
             <div class="avatar avatar-xs me-2">
               <img class="avatar-img rounded-circle" src="${userInfo.avatar}" alt="">
@@ -343,27 +343,32 @@ function editUserInfo(userInfo) {
 
           <div class="col-12">
             <label for="editDisplayName">Avatar</label>
-            <input type="text" name="editAvatar" value="${userInfo.avatar}" class="form-control bg-light my-1"></input> 
+            <input type="text" id="eAvatar" name="editAvatar" value="${userInfo.avatar}" class="form-control bg-light my-1"></input> 
           </div>
 
           <div class="col-12">
             <label for="editEmail">Email</label>
-            <input type="text" name="editEmail" value="${userInfo.email}" class="form-control bg-light my-1"></input> 
+            <input type="text" id="eEmail" name="editEmail" value="${userInfo.email}" class="form-control bg-light my-1"></input> 
           </div>
 
           <div class="col-12">
             <label for="editPassword">Password</label>
-            <input type="text" name="editPassword" value="${userInfo.password}" class="form-control bg-light my-1"></input> 
+            <input type="text" id="ePassword" name="editPassword" value="${userInfo.password}" class="form-control bg-light my-1"></input> 
           </div>
 
           <div class="col-12">
             <label for="editFeeling">Feeling</label>
-            <input type="text" name="editFeeling" value="${userInfo.feeling}" class="form-control bg-light my-1"></input> 
+            <input type="text" id="eFeeling" name="editFeeling" value="${userInfo.feeling}" class="form-control bg-light my-1"></input> 
           </div>
 
           <div class="col-12">
             <label for="editHero">Cover Photo</label>
-            <input type="text" name="editHero" value="${userInfo.hero}" class="form-control bg-light my-1"></input> 
+            <input type="text" id="eHero" name="editHero" value="${userInfo.hero}" class="form-control bg-light my-1"></input> 
+          </div>
+
+          <div class="col-12">
+            <label for="editId">User Id</label>
+            <input type="text" id="eId" name="editId" value="${userInfo.userId}" class="form-control bg-light my-1"></input> 
           </div>
 
         </div>
@@ -389,7 +394,7 @@ function editUserInfo(userInfo) {
       
         <div class="col-lg-8 text-sm-end">
           <button type="button" data-bs-dismiss="modal" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Close</button>
-          <button onclick="alert('unavailable')" type="button" class="btn btn-success-soft">Submit</button>
+          <button onclick="editUser()" type="button" class="btn btn-success-soft">Submit</button>
         </div>
       </div>
   
