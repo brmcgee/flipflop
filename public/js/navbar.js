@@ -16,43 +16,17 @@ function setNavbar(user){
 			</a>
 		
 
-			<ul class="nav flex-nowrap align-items-center ms-auto list-unstyled">
+			<ul class="nav flex-nowrap align-items-center ms-auto list-unstyled" id="userListSelect">
        
-      <select name="userList" id="userList" class="form-control m-0 p-1" style="min-width:150px;"     
-              onchange="setUserId(this.value)">
-                <option value="">...select user</option>
-                <option value="Lady G">Lady G</option>
-                <option value="Doc">Doc</option>
-                <option value="Guest">Guest</option>
-                <option value="Captain Ron">Captain Ron</option>
-                <option value="Brian M">Brian M</option>
-                <option value="Cricket">Cricket</option>
-                <option value="Juice">Juice</option>
-                <option value="Marge">Marge</option>
-                <option value="Snoop D">Snoop D</option>
-                <option value="Hootie">Hootie</option>
-                <option value="Trump">Trump</option>
-                <option value="Zeva">Zeva</option>
-                <option value="Mr. Froggy">Mr. Froggy</option>
-                <option value="Pete">Pete</option>
-                <option value="Hester">Hester</option>
-                <option value="Donald Ducky">Donald Ducky</option>
-                <option value="News">News</option>
-                <option value="Jinko">Jinko</option>
-                <option value="Casper">Casper</option>
-                <option value="Lucy L">Lucy L</option>
-                <option value="Big Al">Big AL</option>
-                <option value="Doc">Doc</option>
-                <option value="Gecko">Gecko</option>
-                <option value="News">News</option>
-                <option value="Lisa">Lisa</option>
-                <option value="Roku">Roku</option>
-                <option value="Paul">Paul</option>                              
-      </select>
+     
+
+
+
+
       
         <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2" src=" ${user.avatar} " alt=" ${user.displayName} ">
+						<img class="avatar-img rounded-2 me-1" src=" ${user.avatar} " alt=" ${user.displayName} ">
 					</a>
           <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
             
@@ -97,3 +71,39 @@ function setNavbar(user){
 
     return html;
 }
+
+
+
+async function getUserList(params) {
+  let url = `https://mysite.boxcar.site/users/`;
+  let userlist = [];
+  let html = `      <select name="userList" id="userList" class="form-control m-0 p-1" style="min-width:150px;"     
+              onchange="setUserId(this.value)">`;
+  try {
+    const response = await fetch(url);
+
+    try {
+        const data = await response.json();
+
+        data.forEach(p => {
+          userlist.push(p.displayName)
+          html += `<option value="${p.displayName}">${p.displayName}</option>`
+        }); 
+
+        html += `      </select>`;
+
+
+        document.getElementById('userListSelect').innerHTML += html;   
+        document.getElementById('userList').value = ''; 
+                 
+    }
+    catch (parseError) {
+        console.log('Failed to parse JSON: ' + parseError);
+    }
+} catch (networkError) {
+    console.log('Network request failed: ', networkError);
+}
+}
+
+
+

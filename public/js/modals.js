@@ -3,7 +3,6 @@
 function createPostModal(user) {
 
     return    `
-    <!-- Create Post Modal -->
     <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="addPost" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -212,7 +211,9 @@ html += `
   </div>
 </div>
 
-`
+`;
+
+
 // create post modal modalAddPost   ADD POST
 let addUrl = `https://mysite.boxcar.site/add-post`;
 html += `
@@ -327,9 +328,7 @@ function editUserInfo(userInfo) {
               <img class="avatar-img rounded-circle" src="${userInfo.avatar}" alt="">
             </div>
       
-            <form class="w-100">
-              <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" placeholder="Share your thoughts..." autofocus></textarea>
-            </form>
+            <p>Edit user info ${userInfo.displayName}</p> 
           </div>
 
 
@@ -365,9 +364,8 @@ function editUserInfo(userInfo) {
   return html;
 }
 
-
-function photoModal(images, user){
 // photoModal   See all photos modal 
+function photoModal(images, user){
 let html =`
   
 <div class="feed modal fade" id="photoModal" tabindex="-1" aria-labelledby="modalphotoModal" aria-hidden="true">

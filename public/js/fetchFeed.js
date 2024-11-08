@@ -45,7 +45,7 @@ function createPostTemplate(post, user) {
             <div>
               <div class="nav nav-divider">
                 <h6 class="nav-item card-title mb-0"> <a href="#!"> ${post.author} </a></h6>
-                <span class="nav-item small"> ${convertDate(post.rDate)}</span>
+                <span class="nav-item small"> ${(post.rDate)}</span>
               </div>
               <p class="mb-0 small"> ${post.title} </p>
             </div>
