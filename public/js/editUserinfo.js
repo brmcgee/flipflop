@@ -33,27 +33,26 @@ async function handleEditUser(user) {
 
         if (this.readyState == 4 && this.status == 200) {
             // console.log(`Connected! user ${user.userid} updated!`);
-            root.innerHTML += `
+            // root.innerHTML += `
             
             
-<div class="card mb-3 mx-auto" style="max-width: 740px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="${user.hero}" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">${user.username}</h5>
-        <p class="card-text">${user.feeling}</p>
-        <p class="card-text"><small class="text-muted">${user.email}</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-            
-            
-            
-            `;  
+            //     <div class="card mb-3 mx-auto" style="max-width: 740px;">
+            //     <div class="row no-gutters">
+            //         <div class="col-md-4">
+            //         <img src="${user.hero}" class="card-img" alt="...">
+            //         </div>
+            //         <div class="col-md-8">
+            //         <div class="card-body">
+            //             <h5 class="card-title">${user.username}</h5>
+            //             <p class="card-text">${user.feeling}</p>
+            //             <p class="card-text"><small class="text-muted">${user.email}</small></p>
+            //         </div>
+            //         </div>
+            //     </div>
+            //     </div>
+            // `;  
+
+            alertStatus(user.username, '', 'danger', `Posted to Server -- Server response of ${this.status}`)
         }
       };
       
