@@ -1,30 +1,7 @@
 const feedRoot = document.getElementById('feedRoot');  
 
-// async function getFreshUserDetails(user, post) {
-//   let url = `https://mysite.boxcar.site/users/${user}`;
-//   console.log(url)
-//   try {
-//     const response = await fetch(url);
-
-//     try {
-//         const data = await response.json();
-//         createPostTemplate(post, user)                      
-//     }
-//     catch (parseError) {
-//         console.log('Failed to parse JSON: ' + parseError);
-//     }
-// } catch (networkError) {
-//     console.log('Network request failed: ', networkError);
-// }
-
-// return;
-
-// }
-
 function createPostTemplate(post, user) {
   
-  // set comment array for length 
-  // getFreshUserDetails(user.displayName, post);
 
   let html =`
 
@@ -36,8 +13,10 @@ function createPostTemplate(post, user) {
 
   `;
 
+  //add ring around active user
   (post.authorId == user.userId) ? html += `<div class="avatar avatar-story me-2">` :   html += `<div class="avatar avatar- me-2">`
     
+
   html += `
           <a href="#!"> <img class="avatar-img rounded-circle" src=" ${post.authorAvatar} " alt=" ${post.title} "> </a>
             </div>
@@ -95,7 +74,7 @@ function createPostTemplate(post, user) {
              <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked ()</a>
           </li>
           <li class=" nav-item">
-            <a class="disabled nav-link mb-0 " href="#!">
+            <a class="disabled nav-link mb-0 " href="#!" >
             <i class="fa fa-comment" aria-hidden="true"></i> Comments ( <span class="" id="commentCount${post.blogId}">${post.commentCount()}</span> )</a>
           </li>
           
@@ -245,7 +224,7 @@ async function fetchFeed(user) {
 
 
 function handleAddComment(postid, userid) {
-  // console.log(postid, userid)
+
     let urlapi = `https://mysite.boxcar.site/post-comment`;
     let user = userid;
     let display = document.getElementById(`userDisplay${userid}`).value;
@@ -299,7 +278,7 @@ function commentWrapAll(postId, userId, comment) {
           
           <ul class="nav nav-divider py-2 small">
             <li class="nav-item">
-              <a class="nav-link" href="#!"> Like (3)</a>
+              <a class="nav-link" href="#!"> Like ()</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#!"> Reply</a>
@@ -308,6 +287,8 @@ function commentWrapAll(postId, userId, comment) {
               <a class="nav-link" href="#!"> View 5 replies</a>
             </li>
           </ul>
+
+          
         </div>
       </div>
     </li>

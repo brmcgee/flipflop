@@ -84,7 +84,7 @@ function modalBodyHtml(post) {
                <div class="col-12 d-flex justify-content-between">
                    
                     <input type="text" id="eCategory" name="category" value="${post.category}"  class=" me-2 form-control bg-light" required> 
-                    <img src="${i}" id="imgE" class="img-fluid ms-1 rounded rounded-2" width="200px p-1" alt="${post.author}, invalid URL.">
+                    <img src="${i}" id="imgE" class="img-fluid ms-1 rounded rounded-2" width="120px p-1" alt="${post.author}, invalid URL.">
 
                </div>
                <div class="col-12">

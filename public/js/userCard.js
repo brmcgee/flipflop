@@ -126,7 +126,8 @@ async function fetchUserData(url) {
                               'email': data.email, 
                               'hero': data.hero,
                               'feeling' : data.feeling,
-                              'date': data.date                 
+                              'date': data.date,
+                              'password' : data.user_password                 
                              }
             // initilize views                     
             root.innerHTML = welcome('info', userInfo, 'logged in');                  
@@ -140,7 +141,7 @@ async function fetchUserData(url) {
             modalsRoot.innerHTML += createPostModal(userInfo);
             modalsRoot.innerHTML += editUserInfo(userInfo);
             shareRoot.innerHTML = share(userInfo);   
-            getUserList()         
+            getUserList(userInfo)         
             fetchFeed(userInfo);
             
 

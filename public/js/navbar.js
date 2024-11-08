@@ -24,7 +24,42 @@ function setNavbar(user){
 
 
       
-        <li class="nav-item ms-2 dropdown">
+
+			</ul>
+			
+		</div>
+	</nav>
+    
+    
+    `;
+
+    return html;
+}
+
+
+//add userList and avatar icon menu to navbar
+async function getUserList(user) {
+  let url = `https://mysite.boxcar.site/users/`;
+  let userlist = [];
+  //select menu
+  let html = `      <select name="userList" id="userList" class="form-control m-0 p-1" style="min-width:150px;"     
+              onchange="setUserId(this.value)">`;
+  try {
+    const response = await fetch(url);
+
+    try {
+        const data = await response.json();
+
+        data.forEach(p => {
+          userlist.push(p.displayName)
+          html += `<option value="${p.displayName}">${p.displayName}</option>`
+        }); 
+
+        html += `      </select>`;
+
+
+        // icon menu at navbar 
+        html += `        <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
 						<img class="avatar-img rounded-2 me-1" src=" ${user.avatar} " alt=" ${user.displayName} ">
 					</a>
@@ -45,12 +80,7 @@ function setNavbar(user){
             </li>
            
             <li><a class="dropdown-item" href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings & Privacy</a></li>
-            <li> 
-              <button type="button" class="btn-sm  ms-2 btn btn-outline-light float-end my-2 my-sm-0" data-toggle="modal" data-target="#addPost">
-                Create Post
-              </button>
-               
-            </li>
+            
             <li> 
               <a class="dropdown-item" href="https://mysite.boxcar.site/admin" target="_blank">
                 <i class="fa fa-book" aria-hidden="true"></i> Documentation
@@ -60,37 +90,7 @@ function setNavbar(user){
             <li><a class="dropdown-item bg-danger-soft-hover" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
             <li> <hr class="dropdown-divider"></li>
           </ul>
-				</li>
-			</ul>
-			
-		</div>
-	</nav>
-    
-    
-    `;
-
-    return html;
-}
-
-
-
-async function getUserList(params) {
-  let url = `https://mysite.boxcar.site/users/`;
-  let userlist = [];
-  let html = `      <select name="userList" id="userList" class="form-control m-0 p-1" style="min-width:150px;"     
-              onchange="setUserId(this.value)">`;
-  try {
-    const response = await fetch(url);
-
-    try {
-        const data = await response.json();
-
-        data.forEach(p => {
-          userlist.push(p.displayName)
-          html += `<option value="${p.displayName}">${p.displayName}</option>`
-        }); 
-
-        html += `      </select>`;
+				</li>`
 
 
         document.getElementById('userListSelect').innerHTML += html;   
