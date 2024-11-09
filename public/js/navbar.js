@@ -52,7 +52,7 @@ async function getUserList(user) {
 
         data.forEach(p => {
           userlist.push(p.displayName || p.username)
-          html += `<option value="${p.displayName || user.username}">${p.displayName || user.username}</option>`
+          html += `<option value="${p.displayName || user.username}">  ${p.displayName || user.username}  </option>`
         }); 
 
         html += `      </select>`;
