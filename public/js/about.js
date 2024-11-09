@@ -12,7 +12,7 @@ function about(user){
           <p> ${user.feeling} </p>
 
           <ul class="list-unstyled mt-3 mb-0">
-            <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Location: <strong> ${user.displayName} </strong> </li>
+            <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Location: <strong> ${user.displayName || user.username} </strong> </li>
             <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single </strong> </li>
             <li> <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> ${user.email} </strong> </li>
           </ul>

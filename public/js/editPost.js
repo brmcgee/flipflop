@@ -27,7 +27,11 @@ async function getPostById(postid) {
 }
 
 async function handleEditPost(postid) {
+
     let handleEditApi = `https://mysite.boxcar.site/update-post-data`
+
+    
+    
     let postId = postid;
     let author = document.getElementById('eAuthor').value;
     let authId = document.getElementById('eAuthorId').value;
@@ -50,8 +54,7 @@ async function handleEditPost(postid) {
             const modal = bootstrap.Modal.getInstance(myModal); 
             modal.hide(); 
 
-            alertStatus(author, title, 'success', 'updated');
-
+            alertStatus(user.displayName, title, 'success', 'updated');
             // reset individual post in dom 
             document.getElementById(`feedPost${postId}`).innerHTML = createPostTemplate (post, user)
         }

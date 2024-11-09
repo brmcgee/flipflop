@@ -394,7 +394,7 @@ function editUserInfo(userInfo) {
       
         <div class="col-lg-8 text-sm-end">
           <button type="button" data-bs-dismiss="modal" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Close</button>
-          <button onclick="editUser()" type="button" class="btn btn-success-soft">Submit</button>
+          <button id="editUserinfoBtn" onclick="editUser()" type="button" class="btn btn-success-soft">Submit</button>
         </div>
       </div>
   

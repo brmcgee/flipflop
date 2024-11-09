@@ -1,5 +1,5 @@
 function editUser() {
-        // let username = 'BRian'
+
         let username = document.getElementById('eUsername').value;
         let avatar = document.getElementById('eAvatar').value;
         let feeling = document.getElementById('eFeeling').value;
@@ -23,36 +23,34 @@ function editUser() {
 
 async function handleEditUser(user) {
 
-    let url = `http://127.0.0.1:5000/edit-user-info`;
+    let url = `http://127.0.0.1:5000/edit-user-info`;  //debug only
     url = `https://mysite.boxcar.site/edit-user-info`;
-    let params = `author=${user.username}&&authId=${user.userid}&&avatar=${user.avatar}&&feeling=${user.feeling}&&email=${user.email}&&password=${user.password}`;
+
+    document.getElementById('editUserinfoBtn').classList.add('disabled');
+
+    let params = `author=${user.username}&&authId=${user.userid}&&avatar=${user.avatar}&&feeling=${user.feeling}&&email=${user.email}&&password=${user.password}&&hero=${user.hero}`;
     
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
 
+    
         if (this.readyState == 4 && this.status == 200) {
-            // console.log(`Connected! user ${user.userid} updated!`);
-            // root.innerHTML += `
-            
-            
-            //     <div class="card mb-3 mx-auto" style="max-width: 740px;">
-            //     <div class="row no-gutters">
-            //         <div class="col-md-4">
-            //         <img src="${user.hero}" class="card-img" alt="...">
-            //         </div>
-            //         <div class="col-md-8">
-            //         <div class="card-body">
-            //             <h5 class="card-title">${user.username}</h5>
-            //             <p class="card-text">${user.feeling}</p>
-            //             <p class="card-text"><small class="text-muted">${user.email}</small></p>
-            //         </div>
-            //         </div>
-            //     </div>
-            //     </div>
-            // `;  
+         
+            // render userCard() about() component and getUserList() to select
+            navbarRoot.innerHTML = setNavbar(user);
+            userRoot.innerHTML = userCard(user);
 
-            alertStatus(user.username, '', 'danger', `Posted to Server -- Server response of ${this.responseText}`)
+
+            aboutRoot.innerHTML = about(user);      
+            getUserList(user); 
+
+
+            
+
+
+            
+            alertStatus(user.username, '', 'success', `<i class="fa fa-user ms-2 me-1" aria-hidden="true"></i> You have succesfully updated your info! `)
 
             const myModal = document.getElementById('modalEditUserInfo'); 
             const modal = bootstrap.Modal.getInstance(myModal); 

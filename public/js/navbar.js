@@ -12,7 +12,7 @@ function setNavbar(user){
 
 			
 			<a class="navbar-brand d-none d-sm-block" href="index.html">
-				<img class=" light-mode-item navbar-brand-item text-light small" src=" ${user.hero} " alt=" ${user.displayName}">
+				<img class=" light-mode-item navbar-brand-item text-light small" src=" ${user.hero} " alt=" ${user.displayName || user.username}">
 			</a>
 		
 
@@ -51,8 +51,8 @@ async function getUserList(user) {
         const data = await response.json();
 
         data.forEach(p => {
-          userlist.push(p.displayName)
-          html += `<option value="${p.displayName}">${p.displayName}</option>`
+          userlist.push(p.displayName || p.username)
+          html += `<option value="${p.displayName || user.username}">${p.displayName || user.username}</option>`
         }); 
 
         html += `      </select>`;
@@ -61,7 +61,7 @@ async function getUserList(user) {
         // icon menu at navbar 
         html += `        <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2 me-1" src=" ${user.avatar} " alt=" ${user.displayName} ">
+						<img class="avatar-img rounded-2 me-1" src=" ${user.avatar} " alt=" ${user.displayName || user.username} ">
 					</a>
           <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
             
@@ -69,10 +69,10 @@ async function getUserList(user) {
               <div class="d-flex align-items-center position-relative">
                
                 <div class="avatar me-3">
-                  <img class="avatar-img rounded-circle" src=" ${user.avatar} " alt=" ${user.displayName} " alt="avatar">
+                  <img class="avatar-img rounded-circle" src=" ${user.avatar} " alt=" ${user.displayName || user.username} " alt="avatar">
                 </div>
                 <div>
-                  <a class="h6 stretched-link" href="#"> ${user.displayName} </a>
+                  <a class="h6 stretched-link" href="#"> ${user.displayName || user.username} </a>
                   <p class="small m-0">Web Developer</p>
                 </div>
               </div>

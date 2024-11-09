@@ -66,18 +66,35 @@ function userCard(user) {
           </div>
           <div class="ms-sm-4 mt-sm-3">
             
-            <h1 class="mb-0 h5"> ${user.displayName} <i class="bi bi-patch-check-fill text-success small"></i></h1>
+            <h1 class="mb-0 h5"> ${user.displayName || user.username} <i class="bi bi-patch-check-fill text-success small"></i></h1>
             <p>250 connections</p>
 
           </div>
           
           <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-            
+`
+
+
+// omit edit user info on guest account with userid 9
+if (user.userId != 9  ) {
+html += `
             <button class="btn btn-danger-soft me-2 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalEditUserInfo">
              <i class="fa fa-address-card" aria-hidden="true"></i>
              </button>
+             `;
+}
+
+if (user.userId == 34) {
+  html += `
+  <a href = "https://mysite.boxcar.site/admin" class="btn btn-info-soft me-2 btn-sm">
+  <i class="fa fa-briefcase" aria-hidden="true"></i>   </a>
+   `;
+
+}
+
+html += `
             <div class="dropdown">
-              
+             
               <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bars" aria-hidden="true"></i>
               </button>
@@ -128,19 +145,20 @@ async function fetchUserData(url) {
                               'feeling' : data.feeling,
                               'date': data.date,
                               'password' : data.user_password                 
-                             }
-            // initilize views  
-                              
+                             };
+
+            // initilize views   RENDER ALL CONTAINERS                  
             root.innerHTML = welcome('info', userInfo, 'logged in');
             root.style.opacity = 1;  
+            
             setTimeout(() => { root.innerHTML = '' }, 1500)  
                            
             userRoot.innerHTML = userCard(userInfo);
             navbarRoot.innerHTML = setNavbar(userInfo);
             aboutRoot.innerHTML = about(userInfo);
-              // photosRoot.innerHTML = photos(); see fetchFeed()
-              // modalsRoot.innerHTML += photoModal(userImage); see photos.js 
-              // friendsRoot.innerHTML = friends();  see fetchFeed()
+                 // photosRoot.innerHTML = photos(); see fetchFeed()
+                 // modalsRoot.innerHTML += photoModal(userImage); see photos.js 
+                 // friendsRoot.innerHTML = friends();  see fetchFeed()
             modalsRoot.innerHTML = modals(userInfo);
             modalsRoot.innerHTML += createPostModal(userInfo);
             modalsRoot.innerHTML += editUserInfo(userInfo);
