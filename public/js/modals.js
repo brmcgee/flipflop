@@ -358,7 +358,7 @@ function editUserInfo(userInfo) {
 
           <div class="col-12">
             <label for="editFeeling">Feeling</label>
-            <input type="text" id="eFeeling" name="editFeeling" value="${userInfo.feeling}" class="form-control bg-light my-1"></input> 
+            <textarea type="text" id="eFeeling" name="editFeeling" rows="4" class="form-control bg-light my-1">${userInfo.feeling}</textarea> 
           </div>
 
           <div class="col-12">
@@ -367,8 +367,8 @@ function editUserInfo(userInfo) {
           </div>
 
           <div class="col-12">
-            <label for="editId">User Id</label>
-            <input type="text" id="eId" name="editId" value="${userInfo.userId}" class="form-control bg-light my-1"></input> 
+            <label for="editId" hidden>User Id</label>
+            <input type="text" id="eId" hidden name="editId" value="${userInfo.userId}" class="form-control bg-light my-1"></input> 
           </div>
 
         </div>

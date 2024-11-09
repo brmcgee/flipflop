@@ -32,6 +32,10 @@ async function getUserInfo(author) {
 let handleEditApi = `https://mysite.boxcar.site/add-post`;
 // handleEditApi = `http://127.0.0.1:5000/add-post`
 async function addPost(user) {
+    const myModal = document.getElementById('modalAddPost'); 
+    const modal = bootstrap.Modal.getInstance(myModal); 
+    modal.hide(); 
+    
     let title = document.getElementById('aTitle').value;
     let body = document.getElementById('aBody').value;
     let category = document.getElementById('aCategory').value;
@@ -49,9 +53,7 @@ async function addPost(user) {
         if (this.readyState == 4 && this.status == 200) {
             console.log('Added post ');
 
-            const myModal = document.getElementById('modalAddPost'); 
-            const modal = bootstrap.Modal.getInstance(myModal); 
-            modal.hide(); 
+
             document.getElementById('newPostRoot').innerHTML += createPostTemplate (post, user)
 
             alertStatus(user.displayName, title, 'success', 'added');
